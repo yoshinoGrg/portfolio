@@ -262,15 +262,20 @@ function captureFrame() {
     const ctx = canvas.getContext('2d');
     ctx.drawImage(video, 0, 0);
 
-    const imageData = canvas.toDataURL('image/jpeg');
+    const imageData = canvas.toDataURL('image/jpeg'); // ✅ correct variable
 
     fetch("https://supratemporal-cayden-dustproof.ngrok-free.dev/predict", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ image: base64Image })
-})
-.then(r => r.json())
-.then(d => console.log(d.prediction));
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ image: imageData }) // ✅ FIX
+    })
+    .then(r => r.json())
+    .then(d => {
+        console.log(d.prediction);
+        predictionText.innerText = d.prediction
+            ? "Prediction: " + d.prediction
+            : "Prediction: No hand detected";
+    });
 }
 </script>
 <script>
