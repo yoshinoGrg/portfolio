@@ -11,7 +11,7 @@
 
     <nav>
         <div class="logo-container">
-            <img src="logo.png" alt="SG Logo" class="nav-logo">
+            <img src="logo.jpg" alt="SG Logo" class="nav-logo">
             <span class="logo-text">GSG</span>
         </div>
         <ul>
@@ -264,18 +264,13 @@ function captureFrame() {
 
     const imageData = canvas.toDataURL('image/jpeg');
 
-    fetch('http://127.0.0.1:5000/predict', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ image: imageData })
-    })
-    .then(res => res.json())
-    .then(data => {
-        predictionText.innerText = "Prediction: " + (data.prediction || "--");
-    })
-    .catch(() => {
-        predictionText.innerText = "Prediction: Server error";
-    });
+    fetch("https://supratemporal-cayden-dustproof.ngrok-free.dev/predict", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ image: base64Image })
+})
+.then(r => r.json())
+.then(d => console.log(d.prediction));
 }
 </script>
 <script>
