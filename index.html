@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suraj Gurung | Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -154,15 +154,15 @@
             <h3 style="margin-bottom: 8px;">Cookie Tracker (PHP/Java/JS)</h3>
             <p>A multi-language project that accesses and securely stores your Name and Location using browser cookies.</p>
             
-            <div id="cookie-app-container" style="margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+            <div id="cookie-app-container" style="margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); width: 100%; box-sizing: border-box; overflow: hidden;">
                 <p id="cookie-greeting" style="color: #a59ff5; font-weight: 500; margin-bottom: 15px;">Scanning for cookies...</p>
-                <div id="cookie-form" style="display: none;">
-                    <input type="text" id="cookie-name" placeholder="Enter your name" style="width: 100%; padding: 12px; margin-bottom: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); outline: none; background: rgba(255,255,255,0.05); color: #fff; font-family: inherit;">
-                    <div style="display: flex; gap: 8px; margin-bottom: 15px;">
-                        <input type="text" id="cookie-location" placeholder="Enter location" style="flex: 1; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); outline: none; background: rgba(255,255,255,0.05); color: #fff; font-family: inherit;">
-                        <button onclick="autoDetectLocation()" style="padding: 12px; border-radius: 8px; border: none; background: #9b59b6; color: white; cursor: pointer; transition: 0.3s;" title="Auto-Detect Location"><i class="fas fa-map-marker-alt"></i></button>
+                <div id="cookie-form" style="display: none; width: 100%;">
+                    <input type="text" id="cookie-name" placeholder="Enter your name" style="width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box; padding: 12px; margin-bottom: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); outline: none; background: rgba(255,255,255,0.05); color: #fff; font-family: inherit;">
+                    <div style="display: flex; gap: 8px; margin-bottom: 15px; width: 100%; box-sizing: border-box;">
+                        <input type="text" id="cookie-location" placeholder="Enter location" style="flex: 1; min-width: 0; max-width: 100%; box-sizing: border-box; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); outline: none; background: rgba(255,255,255,0.05); color: #fff; font-family: inherit;">
+                        <button onclick="autoDetectLocation()" style="padding: 12px; flex-shrink: 0; border-radius: 8px; border: none; background: #9b59b6; color: white; cursor: pointer; transition: 0.3s;" title="Auto-Detect Location"><i class="fas fa-map-marker-alt"></i></button>
                     </div>
-                    <button class="btn" onclick="saveCookieData()" style="width: 100%; margin-top: 0;">Create Cookie</button>
+                    <button class="btn" onclick="saveCookieData()" style="width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box; margin-top: 0;">Create Cookie</button>
                 </div>
                 <button id="clear-cookie-btn" class="btn stop" onclick="clearCookies()" style="display: none; width: 100%; margin-top: 0; background: #e74c3c;">Reset Cookies</button>
             </div>
