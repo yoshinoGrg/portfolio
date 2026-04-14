@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suraj Gurung | Portfolio</title>
-    <link rel="stylesheet" href="style.css?v=6">
+    <link rel="stylesheet" href="style.css?v=7">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -634,66 +634,89 @@ createBoard();
         const typeContainer = document.getElementById("typewriter-text");
         const paragraphText = `And yet — let us not be afraid of what we have made.\n\nAI is not a conqueror. It is a collaborator. It is a new kind of tool, yes — but also a new kind of mirror. When you speak to a machine with intelligence, you are, in a very real sense, hearing the distilled echo of millions of human voices speaking back to you. Every insight it offers was once a human insight. Every story it tells was shaped by human stories.\n\nThink of what becomes possible when human creativity and machine capability walk together. Diseases diagnosed faster. Languages translated with nuance. Artists freed from the tedious to pursue the transcendent. Scientists accelerated toward discoveries that might take lifetimes without assistance.\n\nThe question was never human or machine. The question has always been — what kind of world do we want to build, and are we wise enough to build it well?`;
 
-        // Autoplay Animation Setup
-        let isTyping = false;
-        let fps = 24; // slightly slower for dramatic effect
-        let frameInterval = 1000 / fps;
-        let lastTime = 0;
+        function checkScroll() {
+            if (!scrollContainer) return;
+            const rect = scrollContainer.getBoundingClientRect();
+            // How far we have scrolled into the container
+            const scrollDistance = -rect.top;
+            const maxScroll = rect.height - window.innerHeight;
+            
+            if (maxScroll <= 0) return;
 
-        function playCinematic(timestamp) {
-            if (!lastTime) lastTime = timestamp;
-            const elapsed = timestamp - lastTime;
+            let scrollProgress = scrollDistance / maxScroll;
+            scrollProgress = Math.max(0, Math.min(1, scrollProgress));
+            
+            // 0% to 35% of the height is used for the Transformer sequence
+            let animProgress = Math.max(0, Math.min(1, scrollProgress / 0.35));
+            targetFrame = animProgress * (frameCount - 1);
 
-            if (elapsed > frameInterval && currentFrameIndex < frameCount - 1) {
-                currentFrameIndex++;
-                if (images[currentFrameIndex] && images[currentFrameIndex].complete) {
-                    drawFrame(images[currentFrameIndex]);
-                }
-                lastTime = timestamp - (elapsed % frameInterval);
-            }
-
-            if (currentFrameIndex >= frameCount - 1) {
-                // Animation finished: blur and type
+            // Once it crosses 35%, we trigger the blur and use the remaining 65% for typing
+            if (scrollProgress > 0.35) {
                 if (!canvas.classList.contains("blurred")) {
                     canvas.classList.add("blurred");
                 }
-                if (!isTyping) {
-                    isTyping = true;
-                    setTimeout(startTypewriter, 500); // Wait half a second after blur to begin typing
-                }
-            } else {
-                requestAnimationFrame(playCinematic);
-            }
-        }
-
-        function startTypewriter() {
-            let charIndex = 0;
-            const typingSpeed = 35; // ms per char
-
-            const typeInterval = setInterval(() => {
-                charIndex++;
-                let visibleText = paragraphText.substring(0, charIndex).replace(/\n/g, '<br>');
                 
-                if (typeContainer) {
-                    typeContainer.innerHTML = visibleText + '<span style="border-right: 3px solid white; padding-left: 2px; animation: typeCursorBlink 0.8s step-end infinite;">&nbsp;</span>';
+                let textProgress = Math.max(0, Math.min(1, (scrollProgress - 0.35) / 0.65));
+                let charsToShow = Math.floor(textProgress * paragraphText.length);
+                let visibleText = paragraphText.substring(0, charsToShow).replace(/\n/g, '<br>');
+                
+                if (charsToShow > 0) {
+                    visibleText += '<span style="border-right: 3px solid white; padding-left: 2px; animation: typeCursorBlink 0.8s step-end infinite;">&nbsp;</span>';
                 }
-
-                if (charIndex >= paragraphText.length) {
-                    clearInterval(typeInterval);
-                    if (typeContainer) {
-                        typeContainer.innerHTML = visibleText; // Remove cursor cleanly at end
-                    }
+                if (typeContainer) typeContainer.innerHTML = visibleText;
+            } else {
+                if (canvas.classList.contains("blurred")) {
+                    canvas.classList.remove("blurred");
                 }
-            }, typingSpeed);
+                if (typeContainer) typeContainer.innerHTML = '';
+            }
         }
 
-        // Wait to ensure frames are loaded before kickstarting the cinematic sequence
-        const preloadCheck = setInterval(() => {
-            if (loadedImages > 10) {
-                clearInterval(preloadCheck);
-                requestAnimationFrame(playCinematic);
+        window.addEventListener('scroll', checkScroll, { passive: true });
+        
+        // Initialize immediately in case page is refreshed midway through a scroll
+        checkScroll();
+
+        // Touch event handling for mobile overrides if standard scroll is not enough.
+        // We accumulate swipe distance to scrub the frame target beyond normal scrolling.
+        let isTouching = false;
+        let lastTouchY = 0;
+
+        scrollContainer.addEventListener('touchstart', (e) => {
+            isTouching = true;
+            lastTouchY = e.touches[0].clientY;
+        }, { passive: true });
+
+        scrollContainer.addEventListener('touchmove', (e) => {
+            if (!isTouching) return;
+            const currentY = e.touches[0].clientY;
+            // Native scrolling already occurs simultaneously handling normal progression.
+            // But we can add extra sensitivity specifically for touch users if needed, 
+            // though native scroll is perfectly mapped.
+            lastTouchY = currentY;
+        }, { passive: true });
+
+        scrollContainer.addEventListener('touchend', () => {
+            isTouching = false;
+        }, { passive: true });
+
+        // Render loop for smooth lerping (Linear Interpolation)
+        function updateFrame() {
+            // Lerp implementation for smooth transitions
+            currentFrame += (targetFrame - currentFrame) * 0.1;
+            
+            let displayFrame = Math.round(currentFrame);
+            displayFrame = Math.max(0, Math.min(frameCount - 1, displayFrame));
+            
+            if (displayFrame !== currentFrameIndex && images[displayFrame] && images[displayFrame].complete) {
+                currentFrameIndex = displayFrame;
+                drawFrame(images[displayFrame]);
             }
-        }, 200);
+            
+            requestAnimationFrame(updateFrame);
+        }
+        
+        requestAnimationFrame(updateFrame);
         
     });
 </script>

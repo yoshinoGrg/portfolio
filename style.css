@@ -4,19 +4,19 @@
 
 html {
     scroll-behavior: smooth;
-    overflow-x: hidden !important;
+    overflow-x: clip !important;
     width: 100%;
-    max-width: 100vw;
+    max-width: 100%;
 }
 
 body {
     font-family: 'Inter', 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    color: #ccc8e8; /* Unified text color for dark mode */
-    background-color: #0f0f13; /* Fallback for image matching new theme */
+    color: #ccc8e8;
+    background-color: #0f0f13;
     line-height: 1.6;
-    overflow-x: hidden !important;
+    overflow-x: clip !important;
     width: 100%;
-    max-width: 100vw;
+    max-width: 100%;
     position: relative;
 }
 
@@ -152,7 +152,7 @@ nav ul li a:hover {
 
 /* Scroll-driven Hero Animation Container */
 #hero-scroll-container {
-    height: 100vh;
+    height: 400vh; /* Extended height significantly to fit both image animation and text scroll typing */
     position: relative;
     background: transparent;
 }
