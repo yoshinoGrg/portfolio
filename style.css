@@ -51,6 +51,7 @@ nav {
     left: 0;
     z-index: 1000;
     pointer-events: none; /* Let clicks pass through empty spaces between the split pills */
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 /* Re-enable clicking for child pills */

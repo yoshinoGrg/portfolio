@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suraj Gurung | Portfolio</title>
-    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="style.css?v=3">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -330,6 +330,21 @@
     }
 
     document.addEventListener("DOMContentLoaded", () => {
+      // Smart Auto-Hiding Navbar
+      let lastScrollY = window.scrollY;
+      const navBar = document.querySelector("nav");
+      
+      window.addEventListener("scroll", () => {
+          if (window.scrollY > lastScrollY && window.scrollY > 150) {
+              // Scrolling down
+              navBar.style.transform = "translateY(-150%)";
+          } else {
+              // Scrolling up
+              navBar.style.transform = "translateY(0)";
+          }
+          lastScrollY = window.scrollY;
+      });
+
       // Initialize Cookie Tracker UI
       checkCookieData();
 
@@ -574,24 +589,21 @@ createBoard();
 
             const canvasRatio = canvas.width / canvas.height;
             const imgRatio = img.width / img.height;
-            let drawWidth = canvas.width;
-            let drawHeight = canvas.height;
-            let offsetX = 0;
-            let offsetY = 0;
+            let sX = 0, sY = 0, sWidth = img.width, sHeight = img.height;
 
             if (canvasRatio > imgRatio) {
-                // Screen is wider than image (Desktop). Fit to height, center horizontally.
-                drawWidth = canvas.height * imgRatio;
-                offsetX = (canvas.width - drawWidth) / 2;
+                // Screen is wider. Fit to width, crop height equally.
+                sHeight = img.width / canvasRatio;
+                sY = (img.height - sHeight) / 2;
             } else {
-                // Screen is taller than image (Mobile/Tablet). Fit to width, center vertically.
-                drawHeight = canvas.width / imgRatio;
-                offsetY = (canvas.height - drawHeight) / 2;
+                // Screen is taller (Mobile). Fit to height, crop sides equally.
+                sWidth = img.height * canvasRatio;
+                sX = (img.width - sWidth) / 2;
             }
             
-            // Render it accurately without any cropping (Contain behavior)
+            // Render it full screen natively (Cover behavior)
             ctx.globalAlpha = 1.0;
-            ctx.drawImage(img, 0, 0, img.width, img.height, offsetX, offsetY, drawWidth, drawHeight);
+            ctx.drawImage(img, sX, sY, sWidth, sHeight, 0, 0, canvas.width, canvas.height);
         }
 
         window.addEventListener('resize', () => {
