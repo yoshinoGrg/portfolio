@@ -152,7 +152,7 @@ nav ul li a:hover {
 
 /* Scroll-driven Hero Animation Container */
 #hero-scroll-container {
-    height: 400vh; /* Extended height significantly to fit both image animation and text scroll typing */
+    height: 100vh;
     position: relative;
     background: transparent;
 }
