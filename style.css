@@ -8,10 +8,28 @@ html {
 
 body {
     font-family: 'Inter', 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    color: #1f2937;
-    background-color: #fff;
+    color: #ccc8e8; /* Unified text color for dark mode */
+    background-color: #0f0f13; /* Fallback for image matching new theme */
     line-height: 1.6;
     overflow-x: hidden;
+}
+
+/* Blurred Image Background */
+body::before {
+    content: '';
+    position: fixed;
+    /* Make the container slightly larger than the screen so blurred edges don't show white borders */
+    top: -2%; 
+    left: -2%; 
+    width: 104%; 
+    height: 104%;
+    z-index: -10;
+    background-image: url('back-ground.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(8px); /* The light blur request */
+    pointer-events: none;
 }
 /* General Reset */
 * {
@@ -21,24 +39,38 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-/* Navigation & Logo */
+/* Navigation Wrapper */
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 8%;
-    background: #fff;
+    padding: 20px 8%; 
     position: fixed;
     width: 100%;
     top: 0;
+    left: 0;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    pointer-events: none; /* Let clicks pass through empty spaces between the split pills */
 }
 
+/* Re-enable clicking for child pills */
+.logo-container, nav ul {
+    pointer-events: auto;
+}
+
+/* Glassmorphism Pill 1: Logo & Name */
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
+    padding: 10px 25px;
+    background: rgba(255, 255, 255, 0.2); 
+    backdrop-filter: blur(25px) saturate(200%); 
+    -webkit-backdrop-filter: blur(25px) saturate(200%); 
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+    border-radius: 50px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15); 
+    transition: all 0.3s ease;
 }
 
 .nav-logo {
@@ -59,45 +91,40 @@ nav {
 .logo-text {
     font-weight: bold;
     font-size: 1.2rem;
-    color: #2c3e50;
+    color: #c29416;
 }
 
+/* Glassmorphism Pill 2: Navigation Links */
 nav ul {
     display: flex;
     list-style: none;
-    gap: 30px; /* Adjust spacing between Home, About, etc. */
+    gap: 15px; 
+    padding: 0;
 }
 
 nav ul li a {
+    display: inline-block;
     text-decoration: none;
-    color: #4b5563; /* Soft gray color to match your "About" text */
+    color: #02275b;
     font-size: 1.1rem;
     font-weight: 500;
-    position: relative; /* Required for the line positioning */
-    padding: 5px 0;
-    transition: color 0.3s ease;
+    padding: 10px 25px;
+    background: rgba(255, 255, 255, 0.2); 
+    backdrop-filter: blur(25px) saturate(200%); 
+    -webkit-backdrop-filter: blur(25px) saturate(200%); 
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+    border-radius: 50px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15); 
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /* 1. Highlight text color on touch/hover */
 nav ul li a:hover {
-    color: #3498db; /* Your professional blue */
-}
-
-/* 2. Create the line underneath */
-nav ul li a::after {
-    content: '';
-    position: absolute;
-    width: 0; /* Start with no width */
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: #3498db;
-    transition: width 0.3s ease; /* Animate the width */
-}
-
-/* 3. Make the line grow when touched/hovered */
-nav ul li a:hover::after {
-    width: 100%; /* Line grows to full width of the word */
+    color: white;
+    background: #3498db;
+    border-color: #3498db;
+    transform: translateY(-3px) scale(1.05); /* Slight bounce */
+    box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
 }
 
 /* 1. Parent Hero Section */
@@ -111,75 +138,71 @@ nav ul li a:hover::after {
     color: #333;
 }
 
-/* 2. The Background Layer (This is where the fade happens) */
+/* 2. The Background Layer (Static image removed for canvas scroll animation) */
 .hero::before {
-    content: "";
+    display: none;
+}
+
+/* Scroll-driven Hero Animation Container */
+#hero-scroll-container {
+    height: 400vh; /* Extended height significantly to fit both image animation and text scroll typing */
+    position: relative;
+    background: transparent;
+}
+
+.sticky-section {
+    position: sticky !important;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    width: 100%;
+    z-index: 10;
+}
+
+#heroCanvas {
     position: absolute;
-    top: 0; 
+    top: 0;
     left: 0;
-    width: 100%; 
-    height: 100%;
-    
-    /* ADD YOUR IMAGE HERE */
-    background-image: url('university-bg.jpg'); 
-    background-size: cover;
-    background-position: center;
-    
-    /* REDUCE THIS NUMBER TO FADE IT (0.1 is very light, 1.0 is fully visible) */
-    opacity: 0.6; 
-    
-    z-index: -1; /* Puts the image BEHIND your text and photo */
-}
-
-/* 3. The Hero Container (Keeps your photo and name sharp) */
-.hero-container {
-    position: relative; /* Ensures content stays on top of the fade */
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    max-width: 1000px;
-}
-
-.profile-img-container {
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    overflow: hidden; 
-    border: 3px solid #fff;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    
-    /* 1. Smooth transition for the WHOLE container */
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
-    
-    /* 2. Keeps the zoom smooth on mobile/touch */
-    touch-action: manipulation;
-    cursor: pointer;
-}
-
-.profile-pic {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    display: block;
+    z-index: -2; /* Keeps background behind text */
+    transition: filter 0.6s ease; /* For smooth blurring transition */
 }
 
-/* 3. Zoom effect: Applies to the container (Border + Image) */
-.profile-img-container:hover, 
-.profile-img-container:active {
-    /* Scales the entire circle up by 10% */
-    transform: scale(1.1); 
-    
-    /* Makes the shadow deeper as it "lifts" off the page */
-    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+#heroCanvas.blurred {
+    filter: blur(14px) brightness(0.4); /* Blur the transformer and darken it so the text is fully readable */
 }
 
-.hero-content h1 {
-    font-size: 3.5rem;
-    color: #2c3e50;
+.hero-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    max-width: 900px;
+    z-index: 5;
+    pointer-events: none;
+    text-align: left; /* Aligning long text to left for easier reading is often better, or center */
 }
 
-.hero-content h1 span { color: #3498db; }
+#typewriter-text {
+    color: #f8fafc;
+    font-size: 1.35rem; /* Large enough to read comfortably */
+    line-height: 1.8;
+    font-weight: 400;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.9); /* Makes the letters pop from the background */
+}
+
+@media (max-width: 768px) {
+    #typewriter-text {
+        font-size: 1.05rem;
+    }
+}
+
+@keyframes typeCursorBlink {
+    50% { border-color: transparent; }
+}
+
 
 .btn {
     display: inline-block;
@@ -192,13 +215,6 @@ nav ul li a:hover::after {
     transition: 0.3s;
 }
 
-/* Responsive for Mobile */
-@media (max-width: 768px) {
-    .hero-container {
-        flex-direction: column;
-        text-align: center;
-    }
-}
 /* Sections General */
 section {
     padding: 100px 10%;
@@ -209,6 +225,11 @@ h2 {
     margin-bottom: 40px;
     font-size: 2rem;
     position: relative;
+    color: #f0eeff;
+}
+
+h3 {
+    color: #f0eeff;
 }
 
 h2::after {
@@ -225,10 +246,28 @@ h2::after {
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
 .about-container {
-    max-width: 800px;
+    max-width: 680px;
     margin: 60px auto;
-    padding: 0 20px;
+    padding: 40px;
+    background: rgba(15, 15, 19, 0.7); /* Darker glass to match the requested dark theme */
+    backdrop-filter: blur(25px) saturate(200%);
+    -webkit-backdrop-filter: blur(25px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Softer border for dark mode */
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow */
 }
+
+/* --- New About Section Typography --- */
+.name-block { margin-bottom: 2rem; text-align: left; }
+.name-primary { font-size: 30px; font-weight: 500; color: #f0eeff; letter-spacing: -0.4px; margin-bottom: 5px; }
+.name-alias { font-size: 14px; color: #8880b8; letter-spacing: 0.3px; }
+.divider { width: 40px; height: 2px; background: #7F77DD; border-radius: 2px; margin: 1.75rem 0; }
+.para { font-size: 16px; color: #ccc8e8; line-height: 1.9; margin-bottom: 1.5rem; text-align: left; }
+.highlight { color: #a59ff5; font-weight: 500; }
+.quote-block { margin: 2rem 0 0; padding: 1rem 1.25rem; border-left: 2px solid #7F77DD; background: rgba(127, 119, 221, 0.07); border-radius: 0 6px 6px 0; text-align: left; }
+.quote-text { font-size: 14px; color: #9990cc; line-height: 1.8; font-style: italic; }
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.75rem; justify-content: flex-start; }
+.tag { font-size: 12px; font-weight: 500; padding: 5px 13px; border-radius: 20px; background: rgba(127, 119, 221, 0.12); color: #a59ff5; border: 0.5px solid rgba(127, 119, 221, 0.35); letter-spacing: 0.2px; }
 
 .section-title {
     font-size: 1.8rem;
@@ -242,20 +281,20 @@ h2::after {
     font-size: 1.05rem;
     line-height: 1.8;
     margin-bottom: 1.5rem;
-    color: #4b5563; /* Softer gray for a light feel */
+    color: #ccc8e8;
     font-weight: 400;
 }
 
 /* Light and soft bold - no highlighting */
 .soft-bold {
     font-weight: 500; /* Medium weight, not aggressive */
-    color: #1f2937;   /* Slightly darker than body text to stand out softly */
+    color: #f0eeff;   /* Stand out cleanly in dark mode */
 }
 
 .closing-line {
     font-weight: 500;
     margin-top: 2rem;
-    color: #1f2937;
+    color: #ccc8e8;
     font-size: 1.1rem;
 }
 
@@ -270,7 +309,7 @@ opacity: 1;;
 }
 
 .about:target {
-    background-color: #f9fafb;
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle highlight */
     transition: background-color 0.4s ease;
 }
 
@@ -294,26 +333,61 @@ opacity: 1;;
 
 /* About & Skills */
 .skills {
-    margin-top: 30px;
-    text-align: center; /* This centers the spans horizontally */
-    max-width: 800px;   /* Prevents the skills from spreading too wide */
-    margin-left: auto;  /* Works with max-width to center the whole block */
-    margin-right: auto;
+    margin-top: 80px; /* Additional breathing room */
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding: 30px 0; /* Lets the track scroll edge-to-edge tightly */
+    background: rgba(15, 15, 19, 0.7);
+    backdrop-filter: blur(25px) saturate(200%);
+    -webkit-backdrop-filter: blur(25px) saturate(200%);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-left: none;
+    border-right: none;
+    border-radius: 0; /* Flat side borders for full bleed */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.skills-track {
+    display: inline-flex;
+    width: max-content;
+    animation: scrollTrack 30s linear infinite;
+    padding-left: 20px; /* Slight offset padding to ensure seamless merging */
+}
+
+/* Pause the animation if the user hovers over the skills to read a block */
+.skills-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scrollTrack {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* Scrolls precisely half the total dual-width, then resets */
 }
 
 .skills span {
-    display: inline-flex; /* Changed to inline-flex to align icon and text perfectly */
+    display: inline-flex; 
     align-items: center;
-    background: #e1e8ed;
+    background: rgba(127, 119, 221, 0.12); /* Match the tag style */
+    backdrop-filter: blur(25px) saturate(200%);
+    -webkit-backdrop-filter: blur(25px) saturate(200%);
+    border: 0.5px solid rgba(127, 119, 221, 0.35); /* Match tag border */
     padding: 10px 20px;
     margin: 8px;
     border-radius: 25px;
     font-size: 1rem;
     font-weight: 600;
-    color: #2c3e50;
+    color: #a59ff5; /* Use primary accent for icons */
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.05);
 }
 
 /* Specific icon spacing */
@@ -352,23 +426,40 @@ opacity: 1;;
 }
 
 .project-card {
-    background: white;
-    padding: 30px; /* More breathing room */
-    border-radius: 15px; /* Softer corners to match the theme */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Softer shadow */
+    background: rgba(15, 15, 19, 0.7);
+    backdrop-filter: blur(25px) saturate(200%);
+    -webkit-backdrop-filter: blur(25px) saturate(200%);
+    padding: 30px; 
+    border-radius: 15px; 
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3); 
     transition: all 0.3s ease;
-    border: 1px solid #f1f5f9;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.project-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+/* Global Bubble Pop Animation for Glass Cards */
+@keyframes bubblePop {
+    0%   { transform: scale(1) translateY(0) rotate(0deg); }
+    20%  { transform: scale(1.04) translateY(-3px) rotate(-1.5deg); }
+    40%  { transform: scale(0.96) translateY(-1px) rotate(1.5deg); }
+    60%  { transform: scale(1.02) translateY(-2px) rotate(-1deg); }
+    80%  { transform: scale(0.99) translateY(-1px) rotate(0.5deg); }
+    100% { transform: scale(1.02) translateY(-3px) rotate(0deg); } 
+}
+
+.project-card:hover,
+.about-container:hover,
+.skills:hover,
+.camera-box:hover {
+    animation: bubblePop 0.5s ease forwards;
+    box-shadow: 0 15px 35px rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
 }
 
 /* Contact Section */
 .contact {
     text-align: center;
-    background: #fff;
+    background: transparent;
     padding: 80px 10%;
 }
 .btn {
@@ -470,7 +561,7 @@ footer {
 /* Feedback Section Styling */
 .feedback {
     padding: 80px 10%;
-    background-color: #f9fafb; /* Slightly different background to separate it */
+    background-color: transparent; 
 }
 
 .feedback-container {
@@ -492,14 +583,16 @@ footer {
     display: flex;
     align-items: center;
     gap: 20px;
-    background: white;
+    background: rgba(15, 15, 19, 0.7);
+    backdrop-filter: blur(25px) saturate(200%);
+    -webkit-backdrop-filter: blur(25px) saturate(200%);
     padding: 25px;
     border-radius: 15px;
     text-decoration: none;
-    color: inherit;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    color: #ccc8e8;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid #e5e7eb;
+    border: 1px solid rgba(255, 255, 255, 0.05);
     max-width: 500px;
 }
 
@@ -514,7 +607,7 @@ footer {
 
 .ngl-info p {
     font-size: 0.9rem;
-    color: #6b7280;
+    color: #8880b8; /* Match alias font color */
     margin: 5px 0 0 0;
 }
 .feedback:target .feedback-container {
@@ -536,9 +629,9 @@ footer {
 }
 /* Hover effect to match your Profile and Logo */
 .ngl-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 15px 30px rgba(236, 72, 153, 0.15); /* Pinkish shadow on hover */
-    border-color: #ec4899;
+    animation: bubblePop 0.5s ease forwards;
+    box-shadow: 0 15px 30px rgba(236, 72, 153, 0.3) !important; /* Pinkish shadow on hover */
+    border-color: #ec4899 !important;
 }
 .scroll-animate {
     opacity: 0;
@@ -559,9 +652,12 @@ footer {
     margin: 15px auto;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
     text-align: center;
-    background: #000;
+    background: rgba(15, 15, 19, 0.7);
+    backdrop-filter: blur(25px) saturate(200%);
+    -webkit-backdrop-filter: blur(25px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 #camera {
@@ -609,22 +705,27 @@ footer {
     width: 80px;
     height: 80px;
     font-size: 30px;
-    background: whitesmoke;
-    color: black;
-    border: 2px solid #444;
+    background: rgba(15, 15, 19, 0.7);
+    backdrop-filter: blur(15px) saturate(200%);
+    -webkit-backdrop-filter: blur(15px) saturate(200%);
+    color: #f0eeff;
+    border: 1px solid rgba(255, 255, 255, 0.05);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: 0.2s ease;
+    border-radius: 8px; /* Softer cells */
 }
 
 .cell:hover {
-    background: #21a4cc;
+    background: rgba(127, 119, 221, 0.3); /* Match hover of theme */
 }
 
 #status {
     text-align: center;
     margin: 10px;
     font-weight: bold;
+    color: #a59ff5;
 }
 

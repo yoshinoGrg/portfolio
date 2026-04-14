@@ -23,65 +23,90 @@
         </ul>
     </nav>
 
-    <section id="home" class="hero">
-        <div class="hero-container scroll-animate">
-            <div class="profile-img-container">
-                <img src="profile.png" alt="Suraj Gurung" class="profile-pic">
+    <div class="scroll-container" id="hero-scroll-container">
+        <section id="home" class="hero sticky-section">
+            <canvas id="heroCanvas"></canvas>
+            <div id="hero-text-overlay" class="hero-overlay">
+                <div id="typewriter-text"></div>
             </div>
-            <div class="hero-content">
-                <h1>Hoiii, I'm <span>Suraj Gurung</span></h1>
-                <p>Student at Uttaranchal University, Dehradun</p>
-                <a href="#contact" class="btn">Get In Touch</a>
-            </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
 <section id="about" class="about">
   <div class="about-container scroll-animate">
-    <h2 class="section-title">About Me</h2>
+    <div class="name-block">
+      <p class="name-primary">Suraj Gurung</p>
+      <p class="name-alias">also known as Yoshino</p>
+    </div>
 
-    <div class="about-text">
-      <p>
-        I am <span class="soft-bold">Suraj Gurung</span>, also known as
-        <span class="soft-bold">Yoshino</span>, currently pursuing a
-        <span class="soft-bold">B.Tech degree at Uttaranchal University, Dehradun</span>.
-        I have a strong and evolving interest in
-        <span class="soft-bold">Artificial Intelligence and Machine Learning</span>—domains
-        that challenge my curiosity and expand my way of thinking.
-      </p>
+    <div class="divider"></div>
 
-      <p>
-        Learning is not a temporary pursuit for me; it is a discipline. I enjoy
-        breaking down complex problems, experimenting with algorithms, and
-        converting abstract ideas into functional code. Moments of reflection
-        and recalibration are part of the process—but discipline always restores
-        momentum.
-      </p>
+    <p class="para">
+      I am a <span class="highlight">B.Tech student at Uttaranchal University, Dehradun</span>,
+      shaping my path through the expansive world of
+      <span class="highlight">Artificial Intelligence and Machine Learning</span> —
+      domains that challenge my curiosity and quietly expand the way I see problems.
+    </p>
 
-      <p>
-        I approach my goals with structure and intent. Coding is not merely a
-        skill—it is a craft refined through patience and persistence. I actively
-        challenge myself with demanding technologies; languages like
-        <span class="soft-bold">C++</span> push me beyond comfort, and that pressure
-        is where growth happens.
-      </p>
+    <p class="para">
+      For me, learning is not a sprint toward a finish line — it is a steady,
+      lifelong discipline. I find meaning in breaking down complex ideas,
+      experimenting with algorithms, and turning abstract thinking into working code.
+      When progress slows, I pause, reflect, and recalibrate — because discipline
+      is what carries momentum forward when motivation rests.
+    </p>
 
-      <p class="closing-line">
-        A learner by mindset, a problem-solver by intent, and a technologist in
-        the making—building today for the future ahead.
+    <p class="para">
+      I approach everything with <span class="highlight">structure and intent</span>.
+      Coding is not just a skill I practice — it is a craft I am committed to
+      refining, one patient iteration at a time. I deliberately seek out demanding
+      technologies; languages like <span class="highlight">C++</span> press me
+      beyond what is comfortable, and that pressure is exactly where
+      meaningful growth happens.
+    </p>
+
+    <div class="quote-block">
+      <p class="quote-text">
+        "The quiet moments of struggle are not setbacks — they are the invisible work
+        that makes every breakthrough possible."
       </p>
     </div>
+
+    <div class="tag-row">
+      <span class="tag">AI / ML</span>
+      <span class="tag">Algorithms</span>
+      <span class="tag">Uttaranchal University</span>
+      <span class="tag">Lifelong Learner</span>
+      <span class="tag">creativity</span>
+      
+    </div>
   </div>
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-                <div class="skills scroll-animate">
-                    <span><i class="fab fa-html5"></i> <i class="fab fa-css3-alt"></i> HTML/CSS</span>
-                    <span><i class="fab fa-python"></i> Python</span>
-                    <span><i class="fas fa-code"></i> C / Java</span>
-                    <span><i class="fas fa-database"></i> MySQL</span>
-                </div>
-            </div>
-        </div>
-    </section>
+
+  <div class="skills scroll-animate">
+    <div class="skills-track">
+      <!-- Original Set -->
+      <span><i class="fab fa-html5"></i> <i class="fab fa-css3-alt"></i> HTML/CSS</span>
+      <span><i class="fab fa-python"></i> Python</span>
+      <span><i class="fas fa-code"></i> C / Java</span>
+      <span><i class="fas fa-database"></i> MySQL</span>
+      <span><i class="fab fa-js"></i> JavaScript</span>
+      <span><i class="fab fa-react"></i> React</span>
+      <span><i class="fas fa-file-code"></i> JSON</span>
+      <span><i class="fab fa-java"></i> JSP</span>
+      <span><i class="fab fa-php"></i> PHP</span>
+      <!-- Duplicate Set for Seamless Loop -->
+      <span><i class="fab fa-html5"></i> <i class="fab fa-css3-alt"></i> HTML/CSS</span>
+      <span><i class="fab fa-python"></i> Python</span>
+      <span><i class="fas fa-code"></i> C / Java</span>
+      <span><i class="fas fa-database"></i> MySQL</span>
+      <span><i class="fab fa-js"></i> JavaScript</span>
+      <span><i class="fab fa-react"></i> React</span>
+      <span><i class="fas fa-file-code"></i> JSON</span>
+      <span><i class="fab fa-java"></i> JSP</span>
+      <span><i class="fab fa-php"></i> PHP</span>
+    </div>
+  </div>
+</section>
 
     <section id="projects" class="projects">
     <h2>My Projects</h2>
@@ -126,9 +151,27 @@
 
         <!-- Project 3 -->
         <div class="project-card scroll-animate">
-            <h3>Project 3</h3>
-            <p>Comming Soon.</p>
-            <a href="#" class="btn">View Project</a>
+            <h3 style="margin-bottom: 8px;">Cookie Tracker (PHP/Java/JS)</h3>
+            <p>A multi-language project that accesses and securely stores your Name and Location using browser cookies.</p>
+            
+            <div id="cookie-app-container" style="margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+                <p id="cookie-greeting" style="color: #a59ff5; font-weight: 500; margin-bottom: 15px;">Scanning for cookies...</p>
+                <div id="cookie-form" style="display: none;">
+                    <input type="text" id="cookie-name" placeholder="Enter your name" style="width: 100%; padding: 12px; margin-bottom: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); outline: none; background: rgba(255,255,255,0.05); color: #fff; font-family: inherit;">
+                    <div style="display: flex; gap: 8px; margin-bottom: 15px;">
+                        <input type="text" id="cookie-location" placeholder="Enter location" style="flex: 1; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); outline: none; background: rgba(255,255,255,0.05); color: #fff; font-family: inherit;">
+                        <button onclick="autoDetectLocation()" style="padding: 12px; border-radius: 8px; border: none; background: #9b59b6; color: white; cursor: pointer; transition: 0.3s;" title="Auto-Detect Location"><i class="fas fa-map-marker-alt"></i></button>
+                    </div>
+                    <button class="btn" onclick="saveCookieData()" style="width: 100%; margin-top: 0;">Create Cookie</button>
+                </div>
+                <button id="clear-cookie-btn" class="btn stop" onclick="clearCookies()" style="display: none; width: 100%; margin-top: 0; background: #e74c3c;">Reset Cookies</button>
+            </div>
+            
+            <p style="font-size: 0.8rem; color: #8880b8; margin-top: 18px; text-align: left;">
+                * This live demo runs localized JS. Server-side code is available in the repository: 
+                <a href="cookie_tracker.php" target="_blank" style="color: #3498db; text-decoration: none;">PHP Version</a> &nbsp;|&nbsp; 
+                <a href="cookie_tracker.jsp" target="_blank" style="color: #3498db; text-decoration: none;">Java (JSP) Version</a>
+            </p>
         </div>
 
         <!-- Project 4 -->
@@ -199,12 +242,97 @@
     </div>
 </section>
 <footer>
-    <p>&copy; 2005 Suraj Gurung | Built with ❤️ luv </p>
+    <p>&copy; 2005 Suraj Gurung | Built with 🫶 luv </p>
 </footer>
     <!-- ALL your HTML content here -->
 
     <script>
+    // Cookie Tracker Logic
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        let expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    function checkCookieData() {
+        let uName = getCookie("userName");
+        let uLoc = getCookie("userLocation");
+        const greeting = document.getElementById("cookie-greeting");
+        const form = document.getElementById("cookie-form");
+        const clearBtn = document.getElementById("clear-cookie-btn");
+        
+        if (!greeting) return;
+
+        if (uName != "" && uLoc != "") {
+            greeting.innerText = "Welcome back, " + uName + "! We see your stored location is: " + uLoc + ".";
+            form.style.display = "none";
+            clearBtn.style.display = "inline-block";
+        } else {
+            greeting.innerText = "No cookies found. Identify yourself!";
+            form.style.display = "block";
+            clearBtn.style.display = "none";
+        }
+    }
+
+    function saveCookieData() {
+        let name = document.getElementById("cookie-name").value;
+        let loc = document.getElementById("cookie-location").value;
+        if(name && loc) {
+            setCookie("userName", name, 30);
+            setCookie("userLocation", loc, 30);
+            checkCookieData();
+        } else {
+            alert("Please fill out both Name and Location to save a cookie.");
+        }
+    }
+
+    function clearCookies() {
+        document.cookie = "userName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "userLocation=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        checkCookieData();
+    }
+
+    function autoDetectLocation() {
+        const locInput = document.getElementById("cookie-location");
+        locInput.value = "Detecting...";
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${position.coords.latitude}&lon=${position.coords.longitude}`)
+                .then(r => r.json())
+                .then(data => {
+                    let city = data.address.city || data.address.town || data.address.state || "Unknown";
+                    locInput.value = city;
+                }).catch(e => {
+                    locInput.value = "Lat: " + position.coords.latitude.toFixed(2) + ", Lon: " + position.coords.longitude.toFixed(2);
+                });
+            }, error => {
+                alert("Location access denied or unavailable.");
+                locInput.value = "";
+            });
+        }
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
+      // Initialize Cookie Tracker UI
+      checkCookieData();
+
       const elements = document.querySelectorAll(".scroll-animate");
 
       const observer = new IntersectionObserver(
@@ -415,6 +543,167 @@ function resetGame() {
 }
 
 createBoard();
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById("heroCanvas");
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+        const scrollContainer = document.getElementById("hero-scroll-container");
+        // The exact config requested: using 192 frames from the closest match "transformer" dir.
+        const frameCount = 192; 
+        const getFramePath = (index) => `transformer/ezgif-frame-${index.toString().padStart(3, '0')}.jpg`;
+
+        const images = [];
+        let loadedImages = 0;
+        let currentFrameIndex = -1;
+
+        // Contain-fit drawing logic to prevent pixelation/cropping
+        function drawFrame(img) {
+            if (!img || !img.complete || img.width === 0) return;
+            
+            // Set canvas resolution to exact window size
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Enable high-quality smoothing
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
+
+            const canvasRatio = canvas.width / canvas.height;
+            const imgRatio = img.width / img.height;
+            let sX = 0, sY = 0, sWidth = img.width, sHeight = img.height;
+
+            if (canvasRatio > imgRatio) {
+                // Screen is much wider (Desktop/TV) -> fits width, trims top/bottom
+                sHeight = img.width / canvasRatio;
+                sY = (img.height - sHeight) / 2;
+            } else {
+                // Screen is much taller (Mobile/Tablet) -> fits height, trims sides
+                sWidth = img.height * canvasRatio;
+                sX = (img.width - sWidth) / 2;
+            }
+            
+            // Render it full screen natively
+            ctx.globalAlpha = 1.0;
+            ctx.drawImage(img, sX, sY, sWidth, sHeight, 0, 0, canvas.width, canvas.height);
+        }
+
+        window.addEventListener('resize', () => {
+            if (currentFrameIndex >= 0 && images[currentFrameIndex]) {
+                drawFrame(images[currentFrameIndex]);
+            }
+        });
+
+        // Preload frames
+        for (let i = 1; i <= frameCount; i++) {
+            const img = new Image();
+            img.src = getFramePath(i);
+            img.onload = () => {
+                loadedImages++;
+                // Show the very first frame immediately as soon as it loads
+                if (i === 1) {
+                    currentFrameIndex = 0;
+                    drawFrame(images[0]); 
+                }
+            };
+            images.push(img);
+        }
+
+        // Animation state vars
+        let targetFrame = 0;
+        let currentFrame = 0;
+
+        const typeContainer = document.getElementById("typewriter-text");
+        const paragraphText = `And yet — let us not be afraid of what we have made.\n\nAI is not a conqueror. It is a collaborator. It is a new kind of tool, yes — but also a new kind of mirror. When you speak to a machine with intelligence, you are, in a very real sense, hearing the distilled echo of millions of human voices speaking back to you. Every insight it offers was once a human insight. Every story it tells was shaped by human stories.\n\nThink of what becomes possible when human creativity and machine capability walk together. Diseases diagnosed faster. Languages translated with nuance. Artists freed from the tedious to pursue the transcendent. Scientists accelerated toward discoveries that might take lifetimes without assistance.\n\nThe question was never human or machine. The question has always been — what kind of world do we want to build, and are we wise enough to build it well?`;
+
+        function checkScroll() {
+            if (!scrollContainer) return;
+            const rect = scrollContainer.getBoundingClientRect();
+            // How far we have scrolled into the container
+            const scrollDistance = -rect.top;
+            const maxScroll = rect.height - window.innerHeight;
+            
+            if (maxScroll <= 0) return;
+
+            let scrollProgress = scrollDistance / maxScroll;
+            scrollProgress = Math.max(0, Math.min(1, scrollProgress));
+            
+            // 0% to 35% of the height is used for the Transformer sequence
+            let animProgress = Math.max(0, Math.min(1, scrollProgress / 0.35));
+            targetFrame = animProgress * (frameCount - 1);
+
+            // Once it crosses 35%, we trigger the blur and use the remaining 65% for typing
+            if (scrollProgress > 0.35) {
+                if (!canvas.classList.contains("blurred")) {
+                    canvas.classList.add("blurred");
+                }
+                
+                let textProgress = Math.max(0, Math.min(1, (scrollProgress - 0.35) / 0.65));
+                let charsToShow = Math.floor(textProgress * paragraphText.length);
+                let visibleText = paragraphText.substring(0, charsToShow).replace(/\n/g, '<br>');
+                
+                if (charsToShow > 0) {
+                    visibleText += '<span style="border-right: 3px solid white; padding-left: 2px; animation: typeCursorBlink 0.8s step-end infinite;">&nbsp;</span>';
+                }
+                if (typeContainer) typeContainer.innerHTML = visibleText;
+            } else {
+                if (canvas.classList.contains("blurred")) {
+                    canvas.classList.remove("blurred");
+                }
+                if (typeContainer) typeContainer.innerHTML = '';
+            }
+        }
+
+        window.addEventListener('scroll', checkScroll, { passive: true });
+        
+        // Initialize immediately in case page is refreshed midway through a scroll
+        checkScroll();
+
+        // Touch event handling for mobile overrides if standard scroll is not enough.
+        // We accumulate swipe distance to scrub the frame target beyond normal scrolling.
+        let isTouching = false;
+        let lastTouchY = 0;
+
+        scrollContainer.addEventListener('touchstart', (e) => {
+            isTouching = true;
+            lastTouchY = e.touches[0].clientY;
+        }, { passive: true });
+
+        scrollContainer.addEventListener('touchmove', (e) => {
+            if (!isTouching) return;
+            const currentY = e.touches[0].clientY;
+            // Native scrolling already occurs simultaneously handling normal progression.
+            // But we can add extra sensitivity specifically for touch users if needed, 
+            // though native scroll is perfectly mapped.
+            lastTouchY = currentY;
+        }, { passive: true });
+
+        scrollContainer.addEventListener('touchend', () => {
+            isTouching = false;
+        }, { passive: true });
+
+        // Render loop for smooth lerping (Linear Interpolation)
+        function updateFrame() {
+            // Lerp implementation for smooth transitions
+            currentFrame += (targetFrame - currentFrame) * 0.1;
+            
+            let displayFrame = Math.round(currentFrame);
+            displayFrame = Math.max(0, Math.min(frameCount - 1, displayFrame));
+            
+            if (displayFrame !== currentFrameIndex && images[displayFrame] && images[displayFrame].complete) {
+                currentFrameIndex = displayFrame;
+                drawFrame(images[displayFrame]);
+            }
+            
+            requestAnimationFrame(updateFrame);
+        }
+        
+        requestAnimationFrame(updateFrame);
+        
+    });
 </script>
 </body>
 </html>
