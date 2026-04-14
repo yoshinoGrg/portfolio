@@ -574,21 +574,24 @@ createBoard();
 
             const canvasRatio = canvas.width / canvas.height;
             const imgRatio = img.width / img.height;
-            let sX = 0, sY = 0, sWidth = img.width, sHeight = img.height;
+            let drawWidth = canvas.width;
+            let drawHeight = canvas.height;
+            let offsetX = 0;
+            let offsetY = 0;
 
             if (canvasRatio > imgRatio) {
-                // Screen is much wider (Desktop/TV) -> fits width, trims top/bottom
-                sHeight = img.width / canvasRatio;
-                sY = (img.height - sHeight) / 2;
+                // Screen is wider than image (Desktop). Fit to height, center horizontally.
+                drawWidth = canvas.height * imgRatio;
+                offsetX = (canvas.width - drawWidth) / 2;
             } else {
-                // Screen is much taller (Mobile/Tablet) -> fits height, trims sides
-                sWidth = img.height * canvasRatio;
-                sX = (img.width - sWidth) / 2;
+                // Screen is taller than image (Mobile/Tablet). Fit to width, center vertically.
+                drawHeight = canvas.width / imgRatio;
+                offsetY = (canvas.height - drawHeight) / 2;
             }
             
-            // Render it full screen natively
+            // Render it accurately without any cropping (Contain behavior)
             ctx.globalAlpha = 1.0;
-            ctx.drawImage(img, sX, sY, sWidth, sHeight, 0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0, img.width, img.height, offsetX, offsetY, drawWidth, drawHeight);
         }
 
         window.addEventListener('resize', () => {
