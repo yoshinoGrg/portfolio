@@ -729,3 +729,73 @@ footer {
     color: #a59ff5;
 }
 
+/* =======================================
+   Universal Responsive Design (Mobile / Tablet)
+   ======================================= */
+@media (max-width: 768px) {
+    /* Navbar Scaling */
+    nav {
+        flex-direction: column;
+        padding: 15px 5%;
+        gap: 15px;
+    }
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    nav ul li a {
+        padding: 8px 18px;
+        font-size: 0.95rem;
+    }
+
+    /* Container Scaling */
+    section {
+        padding: 60px 4%;
+    }
+    .about-container {
+        padding: 25px 20px;
+        margin: 30px auto;
+    }
+    h2 {
+        font-size: 1.7rem;
+    }
+    .name-primary {
+        font-size: 24px;
+    }
+    
+    /* Project Cards to 1 Column */
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+    .project-card {
+        padding: 20px;
+    }
+
+    /* Marquee Skills Scaled Down */
+    .skills {
+        margin-top: 50px;
+        padding: 20px 0;
+    }
+    .skills span {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+        margin: 4px;
+    }
+
+    /* Social Links & Feedback Stacked natively */
+    .social-card {
+        width: 100%;
+        max-width: 250px;
+    }
+    .ngl-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 15px;
+        gap: 10px;
+    }
+    .ngl-info {
+        text-align: center;
+    }
+}
+
