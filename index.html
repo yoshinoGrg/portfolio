@@ -11,7 +11,7 @@
 
     <nav>
         <div class="logo-container">
-            <img src="logo.jpg" alt="SG Logo" class="nav-logo">
+            <img src="assets/logo.jpg" alt="SG Logo" class="nav-logo">
             <span class="logo-text">GSG</span>
         </div>
         <ul>
@@ -114,611 +114,165 @@
     <div class="project-grid">
 
         <!-- Project 1 -->
-        <div class="project-card scroll-animate">
-            <h3>Hand Sign Detection (Live)</h3>
-            <br.S
-            <p>Use only <b>Right Hand</b></p>
-            <br>
+        <div class="project-card scroll-animate premium-card">
+            <div class="premium-glow"></div>
+            <img src="assets/images/projects/object-detection.png" alt="Person & Object Detection AI" class="project-image">
+            <h3>Person & Object Detection AI</h3>
+            <p>Real-time AI detection system capable of identifying people and multiple objects through live webcam feed using computer vision and deep learning models.</p>
+            
+            <ul class="feature-list">
+                <li><i class="fas fa-video"></i> Live webcam detection</li>
+                <li><i class="fas fa-vector-square"></i> Real-time bounding boxes</li>
+                <li><i class="fas fa-user-check"></i> Person detection</li>
+                <li><i class="fas fa-cubes"></i> Multi-object recognition</li>
+                <li><i class="fas fa-chart-line"></i> AI confidence scores</li>
+                <li><i class="fas fa-magic"></i> Smooth animations</li>
+            </ul>
 
-            <div class="camera-box">
-                <video id="camera" autoplay playsinline></video>
-                <p id="prediction">Prediction: --</p>
+            <div class="tech-stack">
+                <span>Python</span>
+                <span>OpenCV</span>
+                <span>YOLO</span>
+                <span>Computer Vision</span>
+                <span>AI</span>
             </div>
-
-            <div class="cam-buttons">
-                <button class="btn" onclick="startCamera()">Start Camera</button>
-                <button class="btn stop" onclick="stopCamera()">Stop Camera</button>
-            </div>
+            <a href="https://github.com/yoshinoGrg" target="_blank" class="btn">View GitHub</a>
         </div>
 
         <!-- Project 2 -->
         <div class="project-card scroll-animate">
-            <h3><center>Play with me <u>Tac Toe</u></center></h3>
+            <h3>Play with me Tic Tac Toe</h3>
             <div id="game">
-            <div class="game-container">
-            <div class="controls">
-            <select id="difficulty" onchange="resetGame()">
-                <option value="easy">Easy</option>
-                <option value="hard">Hard</option>
-            </select>
+                <div class="game-container">
+                    <div class="controls">
+                        <select id="difficulty" onchange="resetGame()">
+                            <option value="easy">Easy</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+                    <div class="board" id="board"></div>
+                    <p id="status"></p>
+                    <button class="btn" onclick="resetGame()">Reset Game</button>
+                </div>
             </div>
-            <div class="board" id="board"></div>
-            <p id="status"></p>
-            <button onclick="resetGame()">Reset Game</button>
-            </div>
-        </div>
         </div>
 
         <!-- Project 3 -->
         <div class="project-card scroll-animate">
-            <h3 style="margin-bottom: 8px;">Cookie Tracker (PHP/Java/JS)</h3>
+            <h3 class="cookie-title">Cookie Tracker (PHP/Java/JS)</h3>
             <p>A multi-language project that accesses and securely stores your Name and Location using browser cookies.</p>
             
-            <div id="cookie-app-container" style="margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); width: 100%; box-sizing: border-box; overflow: hidden;">
-                <p id="cookie-greeting" style="color: #a59ff5; font-weight: 500; margin-bottom: 15px;">Scanning for cookies...</p>
-                <div id="cookie-form" style="display: none; width: 100%;">
-                    <input type="text" id="cookie-name" placeholder="Enter your name" style="width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box; padding: 12px; margin-bottom: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); outline: none; background: rgba(255,255,255,0.05); color: #fff; font-family: inherit;">
-                    <div style="display: flex; gap: 8px; margin-bottom: 15px; width: 100%; box-sizing: border-box;">
-                        <input type="text" id="cookie-location" placeholder="Enter location" style="flex: 1; min-width: 0; max-width: 100%; box-sizing: border-box; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); outline: none; background: rgba(255,255,255,0.05); color: #fff; font-family: inherit;">
-                        <button onclick="autoDetectLocation()" style="padding: 12px; flex-shrink: 0; border-radius: 8px; border: none; background: #9b59b6; color: white; cursor: pointer; transition: 0.3s;" title="Auto-Detect Location"><i class="fas fa-map-marker-alt"></i></button>
+            <div id="cookie-app-container" class="cookie-container">
+                <p id="cookie-greeting" class="cookie-greeting">Scanning for cookies...</p>
+                <div id="cookie-form" class="cookie-form">
+                    <input type="text" id="cookie-name" class="cookie-input" placeholder="Enter your name">
+                    <div class="cookie-input-group">
+                        <input type="text" id="cookie-location" class="cookie-input" placeholder="Enter location">
+                        <button onclick="autoDetectLocation()" class="btn-location" title="Auto-Detect Location"><i class="fas fa-map-marker-alt"></i></button>
                     </div>
-                    <button class="btn" onclick="saveCookieData()" style="width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box; margin-top: 0;">Create Cookie</button>
+                    <button class="btn cookie-btn" onclick="saveCookieData()">Create Cookie</button>
                 </div>
-                <button id="clear-cookie-btn" class="btn stop" onclick="clearCookies()" style="display: none; width: 100%; margin-top: 0; background: #e74c3c;">Reset Cookies</button>
+                <button id="clear-cookie-btn" class="btn stop cookie-btn" onclick="clearCookies()" style="display: none;">Reset Cookies</button>
             </div>
             
-            <p style="font-size: 0.8rem; color: #8880b8; margin-top: 18px; text-align: left;">
+            <p class="cookie-note">
                 * This live demo runs localized JS. Server-side code is available in the repository: 
-                <a href="cookie_tracker.php" target="_blank" style="color: #3498db; text-decoration: none;">PHP Version</a> &nbsp;|&nbsp; 
-                <a href="cookie_tracker.jsp" target="_blank" style="color: #3498db; text-decoration: none;">Java (JSP) Version</a>
+                <a href="PHP/cookie_tracker.php" target="_blank" class="cookie-link">PHP Version</a> &nbsp;|&nbsp; 
+                <a href="JSP/cookie_tracker.jsp" target="_blank" class="cookie-link">Java (JSP) Version</a>
             </p>
         </div>
 
         <!-- Project 4 -->
         <div class="project-card scroll-animate">
-            <h3>Project 4</h3>
-            <p>Comming Soon.</p>
-            <a href="#" class="btn">View Project</a>
+            <img src="assets/images/projects/ai-assistant.png" alt="Kira AI Assistant" class="project-image">
+            <h3>Kira AI Assistant</h3>
+            <p>Personal AI assistant with voice interaction, animated anime face UI, automation tools, memory handling, and intelligent responses.</p>
+            <div class="tech-stack">
+                <span>Python</span>
+                <span>AI</span>
+                <span>Voice Recognition</span>
+                <span>Automation</span>
+            </div>
+            <a href="https://github.com/yoshinoGrg" target="_blank" class="btn">View GitHub</a>
         </div>
 
         <!-- Project 5 -->
         <div class="project-card scroll-animate">
-            <h3>Project 5</h3>
-            <p>Comming Soon.</p>
-            <a href="#" class="btn">View Project</a>
+            <img src="assets/images/projects/smartpath.png" alt="SmartPath Navigator" class="project-image">
+            <h3>SmartPath Navigator</h3>
+            <p>Advanced DSA-based navigation engine implementing shortest-path algorithms, intelligent routing, and visual map interaction.</p>
+            <div class="tech-stack">
+                <span>DSA</span>
+                <span>Algorithms</span>
+                <span>JavaScript</span>
+                <span>Pathfinding</span>
+            </div>
+            <a href="https://github.com/yoshinoGrg/smartpath-navigator" target="_blank" class="btn">View GitHub</a>
         </div>
 
-        <!-- Project 6-->
+        <!-- Project 6 -->
         <div class="project-card scroll-animate">
-            <h3>Project 6</h3>
-            <p>Comming Soon.</p>
-            <a href="#" class="btn">View Project</a>
-    </div>
+            <img src="assets/images/projects/kira-stream.png" alt="Kira Stream" class="project-image">
+            <h3>Kira Stream</h3>
+            <p>Netflix-inspired cinematic streaming platform UI with responsive design, smooth animations, and modern interface architecture.</p>
+            <div class="tech-stack">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+                <span>UI/UX</span>
+            </div>
+            <a href="https://github.com/yoshinoGrg/kira-stream" target="_blank" class="btn">View GitHub</a>
+        </div>
+
     </div>
 </section>
 
-
-    <section id="contact" class="contact">
+<section id="contact" class="contact">
     <h2>Connect With Me</h2>
-    <p><h3>Find me on these platforms:</p></h3></p>
-    
+
     <div class="social-links scroll-animate">
-    <a href="https://www.linkedin.com/in/suraj-gurung-97b132366/" target="_blank" class="social-card linkedin">
-        <i class="fab fa-linkedin"></i> LinkedIn
-    </a>
-    <a href="https://github.com/yoshinoGrg" target="_blank" class="social-card github">
-        <i class="fab fa-github"></i> GitHub
-    </a>
-    <a href="https://leetcode.com/u/suraj_grg0/" target="_blank" class="social-card leetcode">
-        <i class="fas fa-code"></i> LeetCode
-    </a>
-    <a href="https://www.instagram.com/suraj.grg_/" target="_blank" class="social-card instagram">
-        <i class="fab fa-instagram"></i> Instagram
-    </a>
-    <a href="https://x.com/_Suraj96Gurung_" target="_blank" class="social-card x-twitter">
-        <i class="fab fa-x-twitter"></i> X
-    </a>
-    <a href="mailto:surajgurung6432@gmail.com" class="social-card email">
-        <i class="fas fa-envelope"></i> Email
-    </a>
-</div>
+
+        <a href="https://github.com/yoshinoGrg" target="_blank" class="social-card github">
+            <i class="fab fa-github"></i> GitHub
+        </a>
+
+        <a href="https://www.linkedin.com/" target="_blank" class="social-card linkedin">
+            <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
+
+        <a href="https://leetcode.com/" target="_blank" class="social-card leetcode">
+            <i class="fas fa-code"></i> LeetCode
+        </a>
+
+    </div>
 </section>
+
 <section id="feedback" class="feedback">
     <div class="feedback-container scroll-animate">
+
         <h2 class="section-title">Feedback</h2>
-        <p class="about-text">Have something to say? Drop an anonymous message via <span class="soft-bold">NGL</span>. Your thoughts help me grow.</p>
-        
-        <ul class="feedback-list">
-            <li>
-                <a href="https://ngl.link/suraj.grg_" target="_blank" class="ngl-card">
-                    <i class="fas fa-comment-dots"></i>
-                    <div class="ngl-info">
-                        <span class="soft-bold">Send Anonymous Message</span>
-                        <p>Tell me what you think about my work or just say hi!</p>
-                    </div>
-                </a>
-            </li>
-        </ul>
+
+        <p class="about-text">
+            Have something to say? Drop an anonymous message.
+        </p>
+
+        <a href="https://ngl.link/suraj.grg_" target="_blank" class="btn">
+            Send Feedback
+        </a>
+
     </div>
 </section>
+
 <footer>
-    <p>&copy; 2005 Suraj Gurung | Built with 🫶 luv </p>
+    <p>© 2026 Suraj Gurung | Built with passion</p>
 </footer>
-    <!-- ALL your HTML content here -->
 
-    <script>
-    // Cookie Tracker Logic
-    function setCookie(cname, cvalue, exdays) {
-        const d = new Date();
-        d.setTime(d.getTime() + (exdays*24*60*60*1000));
-        let expires = "expires="+ d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    }
+<!-- JavaScript Files -->
+<script src="js/cookies.js"></script>
+<script src="js/navbar.js"></script>
+<script src="js/tictactoe.js"></script>
+<script src="js/scroll-animation.js"></script>
+<script src="js/main.js"></script>
 
-    function getCookie(cname) {
-        let name = cname + "=";
-        let decodedCookie = decodeURIComponent(document.cookie);
-        let ca = decodedCookie.split(';');
-        for(let i = 0; i <ca.length; i++) {
-            let c = ca[i];
-            while (c.charAt(0) == ' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return "";
-    }
-
-    function checkCookieData() {
-        let uName = getCookie("userName");
-        let uLoc = getCookie("userLocation");
-        const greeting = document.getElementById("cookie-greeting");
-        const form = document.getElementById("cookie-form");
-        const clearBtn = document.getElementById("clear-cookie-btn");
-        
-        if (!greeting) return;
-
-        if (uName != "" && uLoc != "") {
-            greeting.innerText = "Welcome back, " + uName + "! We see your stored location is: " + uLoc + ".";
-            form.style.display = "none";
-            clearBtn.style.display = "inline-block";
-        } else {
-            greeting.innerText = "No cookies found. Identify yourself!";
-            form.style.display = "block";
-            clearBtn.style.display = "none";
-        }
-    }
-
-    function saveCookieData() {
-        let name = document.getElementById("cookie-name").value;
-        let loc = document.getElementById("cookie-location").value;
-        if(name && loc) {
-            setCookie("userName", name, 30);
-            setCookie("userLocation", loc, 30);
-            checkCookieData();
-        } else {
-            alert("Please fill out both Name and Location to save a cookie.");
-        }
-    }
-
-    function clearCookies() {
-        document.cookie = "userName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        document.cookie = "userLocation=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        checkCookieData();
-    }
-
-    function autoDetectLocation() {
-        const locInput = document.getElementById("cookie-location");
-        locInput.value = "Detecting...";
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(position => {
-                fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${position.coords.latitude}&lon=${position.coords.longitude}`)
-                .then(r => r.json())
-                .then(data => {
-                    let city = data.address.city || data.address.town || data.address.state || "Unknown";
-                    locInput.value = city;
-                }).catch(e => {
-                    locInput.value = "Lat: " + position.coords.latitude.toFixed(2) + ", Lon: " + position.coords.longitude.toFixed(2);
-                });
-            }, error => {
-                alert("Location access denied or unavailable.");
-                locInput.value = "";
-            });
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      // Smart Auto-Hiding Navbar
-      let lastScrollY = window.scrollY;
-      const navBar = document.querySelector("nav");
-      
-      window.addEventListener("scroll", () => {
-          if (window.scrollY > lastScrollY && window.scrollY > 150) {
-              // Scrolling down
-              navBar.style.transform = "translateY(-150%)";
-          } else {
-              // Scrolling up
-              navBar.style.transform = "translateY(0)";
-          }
-          lastScrollY = window.scrollY;
-      });
-
-      // Initialize Cookie Tracker UI
-      checkCookieData();
-
-      const elements = document.querySelectorAll(".scroll-animate");
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("active");
-            } else {
-              entry.target.classList.remove("active");
-            }
-          });
-        },
-        {
-          threshold: 0.15
-        }
-      );
-
-      elements.forEach(el => observer.observe(el));
-    });
-    </script>
-<script>
-
-let stream = null;
-let intervalId = null;
-let aiMovesCount = 0;
-
-
-const video = document.getElementById('camera');
-const predictionText = document.getElementById('prediction');
-
-async function startCamera() {
-    if (stream) return;
-
-    stream = await navigator.mediaDevices.getUserMedia({ video: true });
-    video.srcObject = stream;
-
-    intervalId = setInterval(captureFrame, 1200);
-}
-
-function stopCamera() {
-    if (stream) {
-        stream.getTracks().forEach(track => track.stop());
-        stream = null;
-    }
-    clearInterval(intervalId);
-    predictionText.innerText = "Prediction: --";
-}
-
-function captureFrame() {
-    if (!video.videoWidth) return;
-
-    const canvas = document.createElement('canvas');
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(video, 0, 0);
-
-    const imageData = canvas.toDataURL('image/jpeg'); // ✅ correct variable
-
-    fetch("https://supratemporal-cayden-dustproof.ngrok-free.dev/predict", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ image: imageData }) // ✅ FIX
-    })
-    .then(r => r.json())
-    .then(d => {
-        console.log(d.prediction);
-        predictionText.innerText = d.prediction
-            ? "Prediction: " + d.prediction
-            : "Prediction: No hand detected";
-    });
-}
-</script>
-<script>
-const boardElement = document.getElementById("board");
-const statusText = document.getElementById("status");
-const difficultySelect = document.getElementById("difficulty");
-
-let board = ["", "", "", "", "", "", "", "", ""];
-let gameOver = false;
-
-function createBoard() {
-    boardElement.innerHTML = "";
-    board.forEach((cell, index) => {
-        const div = document.createElement("div");
-        div.classList.add("cell");
-        div.innerText = cell;
-        div.addEventListener("click", () => playerMove(index));
-        boardElement.appendChild(div);
-    });
-}
-
-function checkWinner(b, player) {
-    const wins = [
-        [0,1,2],[3,4,5],[6,7,8], // Rows
-        [0,3,6],[1,4,7],[2,5,8], // Cols
-        [0,4,8],[2,4,6]          // Diagonals
-    ];
-    return wins.some(w => w.every(i => b[i] === player));
-}
-
-function isDraw(b) {
-    return b.every(c => c !== "");
-}
-
-// Minimax AI Algorithm
-function minimax(b, depth, isAI) {
-    if (checkWinner(b, "O")) return 10 - depth; // Subtract depth to favor faster wins
-    if (checkWinner(b, "X")) return depth - 10; // Add depth to favor longer survival
-    if (isDraw(b)) return 0;
-
-    if (isAI) {
-        let bestScore = -Infinity;
-        for (let i = 0; i < 9; i++) {
-            if (b[i] === "") {
-                b[i] = "O";
-                let score = minimax(b, depth + 1, false);
-                b[i] = "";
-                bestScore = Math.max(score, bestScore);
-            }
-        }
-        return bestScore;
-    } else {
-        let bestScore = Infinity;
-        for (let i = 0; i < 9; i++) {
-            if (b[i] === "") {
-                b[i] = "X";
-                let score = minimax(b, depth + 1, true);
-                b[i] = "";
-                bestScore = Math.min(score, bestScore);
-            }
-        }
-        return bestScore;
-    }
-}
-
-function aiMove() {
-    let emptyCells = board
-        .map((v, i) => v === "" ? i : null)
-        .filter(v => v !== null);
-
-    if (emptyCells.length === 0) return;
-
-    // EASY MODE: Purely random
-    if (difficultySelect.value === "easy") {
-        let r = emptyCells[Math.floor(Math.random() * emptyCells.length)];
-        board[r] = "O";
-    } 
-    // HARD MODE: Unbeatable Minimax from the start
-    else {
-        let bestScore = -Infinity;
-        let move;
-
-        for (let i = 0; i < 9; i++) {
-            if (board[i] === "") {
-                board[i] = "O";
-                let score = minimax(board, 0, false);
-                board[i] = "";
-                if (score > bestScore) {
-                    bestScore = score;
-                    move = i;
-                }
-            }
-        }
-        board[move] = "O";
-    }
-}
-
-function playerMove(index) {
-    if (board[index] !== "" || gameOver) return;
-
-    board[index] = "X";
-
-    if (checkWinner(board, "X")) {
-        statusText.innerText = "Well Done!";
-        gameOver = true;
-        createBoard();
-        return;
-    }
-
-    if (isDraw(board)) {
-        statusText.innerText = "SAD!!";
-        gameOver = true;
-        createBoard();
-        return;
-    }
-
-    aiMove();
-
-    
-
-    if (checkWinner(board, "O")) {
-        statusText.innerText = "Noob!!";
-        gameOver = true;
-    } else if (isDraw(board)) {
-        statusText.innerText = "Damn..";
-        gameOver = true;
-    }
-
-    createBoard();
-}
-
-function resetGame() {
-    board = ["", "", "", "", "", "", "", "", ""];
-    gameOver = false;
-    statusText.innerText = "";
-    createBoard();
-}
-
-createBoard();
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const canvas = document.getElementById("heroCanvas");
-        if (!canvas) return;
-        const ctx = canvas.getContext("2d");
-        const scrollContainer = document.getElementById("hero-scroll-container");
-        // The exact config requested: using 192 frames from the closest match "transformer" dir.
-        const frameCount = 192; 
-        const getFramePath = (index) => `transformer/ezgif-frame-${index.toString().padStart(3, '0')}.jpg`;
-
-        const images = [];
-        let loadedImages = 0;
-        let currentFrameIndex = -1;
-
-        // Contain-fit drawing logic to prevent pixelation/cropping
-        function drawFrame(img) {
-            if (!img || !img.complete || img.width === 0) return;
-            
-            // Set canvas resolution to exact window size
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Enable high-quality smoothing
-            ctx.imageSmoothingEnabled = true;
-            ctx.imageSmoothingQuality = 'high';
-
-            const canvasRatio = canvas.width / canvas.height;
-            const imgRatio = img.width / img.height;
-            let sX = 0, sY = 0, sWidth = img.width, sHeight = img.height;
-
-            if (canvasRatio > imgRatio) {
-                // Screen is wider. Fit to width, crop height equally.
-                sHeight = img.width / canvasRatio;
-                sY = (img.height - sHeight) / 2;
-            } else {
-                // Screen is taller (Mobile). Fit to height, crop sides equally.
-                sWidth = img.height * canvasRatio;
-                sX = (img.width - sWidth) / 2;
-            }
-            
-            // Render it full screen natively (Cover behavior)
-            ctx.globalAlpha = 1.0;
-            ctx.drawImage(img, sX, sY, sWidth, sHeight, 0, 0, canvas.width, canvas.height);
-        }
-
-        window.addEventListener('resize', () => {
-            if (currentFrameIndex >= 0 && images[currentFrameIndex]) {
-                drawFrame(images[currentFrameIndex]);
-            }
-        });
-
-        // Preload frames
-        for (let i = 1; i <= frameCount; i++) {
-            const img = new Image();
-            img.src = getFramePath(i);
-            img.onload = () => {
-                loadedImages++;
-                // Show the very first frame immediately as soon as it loads
-                if (i === 1) {
-                    currentFrameIndex = 0;
-                    drawFrame(images[0]); 
-                }
-            };
-            images.push(img);
-        }
-
-        // Animation state vars
-        let targetFrame = 0;
-        let currentFrame = 0;
-
-        const typeContainer = document.getElementById("typewriter-text");
-        const paragraphText = `And yet — let us not be afraid of what we have made.\n\nAI is not a conqueror. It is a collaborator. It is a new kind of tool, yes — but also a new kind of mirror. When you speak to a machine with intelligence, you are, in a very real sense, hearing the distilled echo of millions of human voices speaking back to you. Every insight it offers was once a human insight. Every story it tells was shaped by human stories.\n\nThink of what becomes possible when human creativity and machine capability walk together. Diseases diagnosed faster. Languages translated with nuance. Artists freed from the tedious to pursue the transcendent. Scientists accelerated toward discoveries that might take lifetimes without assistance.\n\nThe question was never human or machine. The question has always been — what kind of world do we want to build, and are we wise enough to build it well?`;
-
-        function checkScroll() {
-            if (!scrollContainer) return;
-            const rect = scrollContainer.getBoundingClientRect();
-            // How far we have scrolled into the container
-            const scrollDistance = -rect.top;
-            const maxScroll = rect.height - window.innerHeight;
-            
-            if (maxScroll <= 0) return;
-
-            let scrollProgress = scrollDistance / maxScroll;
-            scrollProgress = Math.max(0, Math.min(1, scrollProgress));
-            
-            // 0% to 35% of the height is used for the Transformer sequence
-            let animProgress = Math.max(0, Math.min(1, scrollProgress / 0.35));
-            targetFrame = animProgress * (frameCount - 1);
-
-            // Once it crosses 35%, we trigger the blur and use the remaining 65% for typing
-            if (scrollProgress > 0.35) {
-                if (!canvas.classList.contains("blurred")) {
-                    canvas.classList.add("blurred");
-                }
-                
-                let textProgress = Math.max(0, Math.min(1, (scrollProgress - 0.35) / 0.65));
-                let charsToShow = Math.floor(textProgress * paragraphText.length);
-                let visibleText = paragraphText.substring(0, charsToShow).replace(/\n/g, '<br>');
-                
-                if (charsToShow > 0) {
-                    visibleText += '<span style="border-right: 3px solid white; padding-left: 2px; animation: typeCursorBlink 0.8s step-end infinite;">&nbsp;</span>';
-                }
-                if (typeContainer) typeContainer.innerHTML = visibleText;
-            } else {
-                if (canvas.classList.contains("blurred")) {
-                    canvas.classList.remove("blurred");
-                }
-                if (typeContainer) typeContainer.innerHTML = '';
-            }
-        }
-
-        window.addEventListener('scroll', checkScroll, { passive: true });
-        
-        // Initialize immediately in case page is refreshed midway through a scroll
-        checkScroll();
-
-        // Touch event handling for mobile overrides if standard scroll is not enough.
-        // We accumulate swipe distance to scrub the frame target beyond normal scrolling.
-        let isTouching = false;
-        let lastTouchY = 0;
-
-        scrollContainer.addEventListener('touchstart', (e) => {
-            isTouching = true;
-            lastTouchY = e.touches[0].clientY;
-        }, { passive: true });
-
-        scrollContainer.addEventListener('touchmove', (e) => {
-            if (!isTouching) return;
-            const currentY = e.touches[0].clientY;
-            // Native scrolling already occurs simultaneously handling normal progression.
-            // But we can add extra sensitivity specifically for touch users if needed, 
-            // though native scroll is perfectly mapped.
-            lastTouchY = currentY;
-        }, { passive: true });
-
-        scrollContainer.addEventListener('touchend', () => {
-            isTouching = false;
-        }, { passive: true });
-
-        // Render loop for smooth lerping (Linear Interpolation)
-        function updateFrame() {
-            // Lerp implementation for smooth transitions
-            currentFrame += (targetFrame - currentFrame) * 0.1;
-            
-            let displayFrame = Math.round(currentFrame);
-            displayFrame = Math.max(0, Math.min(frameCount - 1, displayFrame));
-            
-            if (displayFrame !== currentFrameIndex && images[displayFrame] && images[displayFrame].complete) {
-                currentFrameIndex = displayFrame;
-                drawFrame(images[displayFrame]);
-            }
-            
-            requestAnimationFrame(updateFrame);
-        }
-        
-        requestAnimationFrame(updateFrame);
-        
-    });
-</script>
 </body>
 </html>

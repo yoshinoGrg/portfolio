@@ -30,7 +30,7 @@ body::before {
     width: 104%; 
     height: 104%;
     z-index: -10;
-    background-image: url('back-ground.jpeg');
+    background-image: url('assets/back-ground.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -285,7 +285,7 @@ h2::after {
     font-weight: 600;
     margin-bottom: 2rem;
     letter-spacing: -0.5px;
-    color: #111827;
+    color: #ffffff;
 }
 
 .about-text p {
@@ -437,15 +437,45 @@ opacity: 1;;
     gap: 25px;
 }
 
-.project-card {
-    background: rgba(15, 15, 19, 0.7);
-    backdrop-filter: blur(25px) saturate(200%);
-    -webkit-backdrop-filter: blur(25px) saturate(200%);
-    padding: 30px; 
-    border-radius: 15px; 
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3); 
-    transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+.project-card{
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:20px;
+    padding:20px;
+    transition:0.4s ease;
+    backdrop-filter:blur(10px);
+    overflow:hidden;
+}
+
+.project-image{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    border-radius:14px;
+    margin-bottom:18px;
+}
+
+.project-card h3{
+    margin-bottom:12px;
+}
+
+.project-card p{
+    color:#cfcfcf;
+    line-height:1.6;
+}
+
+.tech-stack{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:18px 0;
+}
+
+.tech-stack span{
+    padding:7px 14px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.08);
+    font-size:0.8rem;
 }
 
 /* Global Bubble Pop Animation for Glass Cards */
@@ -458,7 +488,12 @@ opacity: 1;;
     100% { transform: scale(1.02) translateY(-3px) rotate(0deg); } 
 }
 
-.project-card:hover,
+.project-card:hover {
+    transform:translateY(-10px) scale(1.02);
+    box-shadow:0 10px 40px rgba(0,0,0,0.4);
+    cursor: pointer;
+}
+
 .about-container:hover,
 .skills:hover,
 .camera-box:hover {
@@ -741,6 +776,137 @@ footer {
     color: #a59ff5;
 }
 
+/* Cookie Tracker Styles */
+.cookie-title {
+    margin-bottom: 8px;
+}
+.cookie-container {
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.05);
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.cookie-greeting {
+    color: #a59ff5;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+.cookie-form {
+    display: none;
+    width: 100%;
+}
+.cookie-input {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+    outline: none;
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    font-family: inherit;
+}
+.cookie-input-group {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.cookie-input-group .cookie-input {
+    flex: 1;
+    margin-bottom: 0;
+}
+.btn-location {
+    padding: 12px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    border: none;
+    background: #9b59b6;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn-location:hover {
+    background: #8e44ad;
+}
+.cookie-btn {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    margin-top: 0;
+}
+.cookie-note {
+    font-size: 0.8rem;
+    color: #8880b8;
+    margin-top: 18px;
+    text-align: left;
+}
+.cookie-link {
+    color: #3498db;
+    text-decoration: none;
+}
+.cookie-link:hover {
+    text-decoration: underline;
+}
+
+/* Premium Card Additions */
+.premium-card {
+    position: relative;
+    border: 1px solid rgba(165, 159, 245, 0.2);
+}
+
+.premium-card:hover {
+    border-color: rgba(165, 159, 245, 0.8);
+    box-shadow: 0 10px 40px rgba(165, 159, 245, 0.2);
+}
+
+.premium-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 0%, rgba(165, 159, 245, 0.1), transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.premium-card h3, .premium-card p, .premium-card .feature-list, .premium-card .tech-stack, .premium-card .btn, .premium-card .project-image {
+    position: relative;
+    z-index: 1;
+}
+
+.feature-list {
+    list-style: none;
+    margin: 15px 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.feature-list li {
+    font-size: 0.85rem;
+    color: #b0aecf;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.feature-list i {
+    color: #a59ff5;
+    font-size: 0.9rem;
+}
+
 /* =======================================
    Universal Responsive Design (Mobile / Tablet)
    ======================================= */
@@ -782,6 +948,9 @@ footer {
     }
     .project-card {
         padding: 20px;
+    }
+    .feature-list {
+        grid-template-columns: 1fr;
     }
 
     /* Marquee Skills Scaled Down */
