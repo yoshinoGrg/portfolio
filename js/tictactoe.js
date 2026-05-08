@@ -95,11 +95,29 @@ function playerMove(index) {
     board[index] = "X";
 
     if (checkWinner(board, "X")) {
-        statusText.innerText = "Well Done!";
-        gameOver = true;
-        createBoard();
-        return;
+
+    statusText.innerText =
+    "You Won!";
+
+    gameOver = true;
+
+    createBoard();
+
+    const difficulty =
+    document.getElementById("difficulty").value;
+
+    const victoryMessage =
+    document.getElementById("victory-message");
+
+    if(difficulty === "hard"){
+
+        victoryMessage.style.display =
+        "block";
+
     }
+
+    return;
+}
 
     if (isDraw(board)) {
         statusText.innerText = "SAD!!";
@@ -126,6 +144,10 @@ function resetGame() {
     gameOver = false;
     statusText.innerText = "";
     createBoard();
+    document.getElementById(
+    "victory-message"
+).style.display = "none";
 }
+
 
 createBoard();
