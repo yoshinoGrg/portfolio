@@ -5,10 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Suraj Gurung (Yoshino) — B.Tech CSE student at Uttaranchal University specialising in AI & ML. Portfolio of projects, skills, and contact.">
     <title>Suraj Gurung | Portfolio</title>
-    <link rel="stylesheet" href="style.css?v=10">
+    <link rel="stylesheet" href="style.css?v=12">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+
+    <!-- ===================== BOOT SEQUENCE ===================== -->
+    <!-- Full-screen terminal boot overlay. Hides the portfolio behind it until
+         the fake boot sequence finishes typing, then fades out (see js/boot.js). -->
+    <div id="boot-screen" aria-hidden="true">
+        <canvas id="boot-particles"></canvas>
+        <div class="boot-scanlines"></div>
+        <div class="boot-vignette"></div>
+
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="term-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <span class="term-title">TERMINAL</span>
+                <span class="term-skip" id="boot-skip">SKIP &raquo;</span>
+            </div>
+            <div class="terminal-body" id="terminal-body">
+                <pre id="terminal-output"></pre><span class="term-cursor" id="term-cursor">&#9608;</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fine noise grain over the whole site -->
+    <div class="noise-overlay" aria-hidden="true"></div>
 
     <!-- ===================== NAVIGATION ===================== -->
     <nav>
@@ -33,18 +60,52 @@
     </nav>
 
     <!-- ===================== HERO ===================== -->
-    <div id="hero-scroll-container">
-        <section id="home" class="hero sticky-section">
-            <canvas id="heroCanvas"></canvas>
-            <div id="hero-text-overlay" class="hero-overlay">
-                <div id="typewriter-text"></div>
+    <section id="home" class="hero">
+        <!-- Ambient canvas: floating particles + grid -->
+        <canvas id="hero-particles"></canvas>
+        <!-- Cursor-tracking glow: "light follows mouse" -->
+        <div class="hero-cursor-glow" id="hero-cursor-glow"></div>
+        <div class="hero-scanlines"></div>
+
+        <div class="hero-overlay">
+
+            <p class="hero-kicker">
+                <span class="kicker-dot"></span> B.Tech CSE &bull; AI &amp; Machine Learning
+            </p>
+
+            <h1 class="hero-heading">
+                Hi, I'm <span class="glow-text">Suraj Gurung</span>
+            </h1>
+
+            <div class="hero-roles" aria-live="polite">
+                <span class="role-text" id="role-text">AI Engineer</span>
             </div>
-        </section>
-    </div>
+
+            <p class="hero-subtitle">
+                Create intelligent systems that solve real-world problems through AI,
+                machine learning, and modern software engineering.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-glow-primary">Explore Portfolio</a>
+                <!-- <a href="assets/Suraj_Gurung_Resume.pdf" class="btn btn-glow-ghost" download>Download Resume</a> -->
+            </div>
+        </div>
+
+        <a href="#about" class="hero-scroll-cue" aria-label="Scroll to about section">
+            <span class="cue-arrow">&darr;</span>
+            <span>Explore</span>
+        </a>
+    </section>
 
     <!-- ===================== ABOUT ===================== -->
     <section id="about" class="about">
-        <div class="about-container scroll-animate">
+        <div class="bg-bubble cyan" style="width:420px;height:420px;top:-60px;left:-120px;"></div>
+        <div class="bg-bubble white" style="width:300px;height:300px;bottom:60px;right:-80px;"></div>
+
+        <div class="about-container bracket-panel scroll-animate">
+            <p class="eyebrow"><span class="num">SEC — 01</span> ABOUT</p>
+
             <div class="name-block">
                 <p class="name-primary">Suraj Gurung</p>
                 <p class="name-alias">also known as Yoshino</p>
@@ -53,27 +114,23 @@
             <div class="divider"></div>
 
             <p class="para">
-                I am a <span class="highlight">B.Tech student at Uttaranchal University, Dehradun</span>,
-                shaping my path through the expansive world of
-                <span class="highlight">Artificial Intelligence and Machine Learning</span> —
-                domains that challenge my curiosity and quietly expand the way I see problems.
+                I'm a <span class="highlight">B.Tech CSE student at Uttaranchal University, Dehradun</span>,
+                building my path through <span class="highlight">Artificial Intelligence and Machine Learning</span> —
+                the systems, models, and math that turn raw data into working intelligence.
             </p>
 
             <p class="para">
-                For me, learning is not a sprint toward a finish line — it is a steady,
-                lifelong discipline. I find meaning in breaking down complex ideas,
-                experimenting with algorithms, and turning abstract thinking into working code.
-                When progress slows, I pause, reflect, and recalibrate — because discipline
-                is what carries momentum forward when motivation rests.
+                Learning, to me, is closer to engineering than sprinting: break the problem down,
+                test the hypothesis, rebuild what fails. I spend most of my time experimenting with
+                algorithms and turning abstract theory into code that actually runs — and when
+                progress stalls, I recalibrate instead of forcing it.
             </p>
 
             <p class="para">
-                I approach everything with <span class="highlight">structure and intent</span>.
-                Coding is not just a skill I practice — it is a craft I am committed to
-                refining, one patient iteration at a time. I deliberately seek out demanding
-                technologies; languages like <span class="highlight">C++</span> press me
-                beyond what is comfortable, and that pressure is exactly where
-                meaningful growth happens.
+                I work with <span class="highlight">structure and intent</span>. Code isn't just output —
+                it's a discipline I'm refining one iteration at a time, deliberately reaching for
+                languages like <span class="highlight">C++</span> that push past what's comfortable,
+                because that's where the real learning happens.
             </p>
 
             <div class="quote-block">
@@ -88,7 +145,74 @@
                 <span class="tag">Algorithms</span>
                 <span class="tag">Uttaranchal University</span>
                 <span class="tag">Lifelong Learner</span>
-                <span class="tag">Creativity</span>
+                <span class="tag">Volleyball Captain</span>
+            </div>
+
+            <!-- Animated counters -->
+            <div class="counter-row">
+                <div class="counter-item">
+                    <span class="counter-num" data-count="6">0</span>
+                    <span class="counter-label">Projects Shipped</span>
+                </div>
+                <div class="counter-item">
+                    <span class="counter-num" data-count="9">0</span>
+                    <span class="counter-label">Core Technologies</span>
+                </div>
+                <div class="counter-item">
+                    <span class="counter-num" data-count="2">0</span>
+                    <span class="counter-label">Algorithms Implemented Live</span>
+                </div>
+                <div class="counter-item">
+                    <span class="counter-num" data-infinite="true">0</span>
+                    <span class="counter-label">Curiosity, Uncapped</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline / Education / Languages -->
+        <div class="info-grid scroll-animate">
+
+            <!-- Timeline -->
+            <div class="info-card glass-panel bracket-panel">
+                <p class="info-title"><i class="fas fa-timeline"></i> Timeline</p>
+                <ul class="timeline">
+                    <li class="timeline-item">
+                        <span class="tl-dot"></span>
+                        <span class="tl-year">2023 &mdash; Present</span>
+                        <span class="tl-text">B.Tech, Computer Science &amp; Engineering (AI &amp; ML) &mdash; Uttaranchal University, Dehradun</span>
+                    </li>
+                    <li class="timeline-item">
+                        <span class="tl-dot"></span>
+                        <span class="tl-year">Ongoing</span>
+                        <span class="tl-text">Self-directed AI/ML engineering &mdash; models, algorithms, and applied projects</span>
+                    </li>
+                    <li class="timeline-item">
+                        <span class="tl-dot"></span>
+                        <span class="tl-year">Ongoing</span>
+                        <span class="tl-text">Full-stack development &mdash; designing and shipping browser-based tools independently</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Education -->
+            <div class="info-card glass-panel bracket-panel">
+                <p class="info-title"><i class="fas fa-graduation-cap"></i> Education</p>
+                <div class="edu-block">
+                    <p class="edu-degree">B.Tech &mdash; Computer Science &amp; Engineering</p>
+                    <p class="edu-spec">Specialization: Artificial Intelligence &amp; Machine Learning</p>
+                    <p class="edu-school">Uttaranchal University, Dehradun</p>
+                </div>
+            </div>
+
+            <!-- Languages -->
+            <div class="info-card glass-panel bracket-panel">
+                <p class="info-title"><i class="fas fa-language"></i> Languages</p>
+                <!-- Edit proficiencies below to match reality -->
+                <ul class="lang-list">
+                    <li><span>English</span><span class="lang-level">Fluent</span></li>
+                    <li><span>Hindi</span><span class="lang-level">Native</span></li>
+                    <li><span>Nepali</span><span class="lang-level">Native</span></li>
+                </ul>
             </div>
         </div>
 
@@ -117,23 +241,52 @@
                 <span><i class="fab fa-php"></i> PHP</span>
             </div>
         </div>
+
+        <!-- Animated skill progress bars -->
+        <div class="skill-bars scroll-animate">
+            <div class="skill-bar" data-level="92">
+                <div class="skill-bar-label"><i class="fas fa-file-code"></i><span>HTML / CSS</span><span class="skill-pct">0%</span></div>
+                <div class="skill-track"><div class="skill-fill"></div></div>
+            </div>
+            <div class="skill-bar" data-level="88">
+                <div class="skill-bar-label"><i class="fab fa-js"></i><span>JavaScript</span><span class="skill-pct">0%</span></div>
+                <div class="skill-track"><div class="skill-fill"></div></div>
+            </div>
+            <div class="skill-bar" data-level="85">
+                <div class="skill-bar-label"><i class="fab fa-python"></i><span>Python</span><span class="skill-pct">0%</span></div>
+                <div class="skill-track"><div class="skill-fill"></div></div>
+            </div>
+            <div class="skill-bar" data-level="80">
+                <div class="skill-bar-label"><i class="fas fa-code"></i><span>C / Java</span><span class="skill-pct">0%</span></div>
+                <div class="skill-track"><div class="skill-fill"></div></div>
+            </div>
+            <div class="skill-bar" data-level="76">
+                <div class="skill-bar-label"><i class="fab fa-react"></i><span>React</span><span class="skill-pct">0%</span></div>
+                <div class="skill-track"><div class="skill-fill"></div></div>
+            </div>
+            <div class="skill-bar" data-level="78">
+                <div class="skill-bar-label"><i class="fas fa-database"></i><span>MySQL</span><span class="skill-pct">0%</span></div>
+                <div class="skill-track"><div class="skill-fill"></div></div>
+            </div>
+        </div>
     </section>
 
     <!-- ===================== PROJECTS ===================== -->
     <section id="projects" class="projects">
-        <h2>My Projects</h2>
+        <div class="bg-bubble cyan" style="width:380px;height:380px;top:120px;right:-100px;"></div>
+
+        <h2>Projects</h2>
 
         <div class="project-grid">
 
             <!-- Project 1: Object Detection -->
-            <div class="project-card scroll-animate premium-card">
+            <div class="project-card scroll-animate bracket-panel">
                 <div class="premium-glow"></div>
 
                 <h3>Person &amp; Object Detection AI</h3>
                 <p>
-                    Real-time AI detection system capable of identifying
-                    people and multiple objects directly inside the browser
-                    using live webcam feed and TensorFlow.js.
+                    Real-time detection running entirely in the browser — identifies people and
+                    objects from a live webcam feed using TensorFlow.js.
                 </p>
 
                 <div class="camera-box">
@@ -171,14 +324,13 @@
             </div>
 
             <!-- Project 2: Tic Tac Toe -->
-            <div class="project-card scroll-animate premium-card">
+            <div class="project-card scroll-animate bracket-panel">
                 <div class="premium-glow"></div>
 
                 <h3>Play Tic Tac Toe Against AI</h3>
                 <p class="project-description">
-                    Challenge an AI-powered Tic Tac Toe engine with adaptive difficulty modes.
-                    Easy mode plays casually, while Hard mode uses the Minimax algorithm to make
-                    nearly unbeatable decisions in real time.
+                    A Minimax-driven engine with adaptive difficulty — Easy plays loose, Hard plays
+                    optimally and is effectively unbeatable.
                 </p>
 
                 <div class="challenge-banner">
@@ -209,9 +361,9 @@
             </div>
 
             <!-- Project 3: Cookie Tracker -->
-            <div class="project-card scroll-animate premium-card">
+            <div class="project-card scroll-animate bracket-panel">
                 <h3 class="cookie-title">Cookie Tracker (PHP/Java/JS)</h3>
-                <p>A multi-language project that accesses and securely stores your Name and Location using browser cookies.</p>
+                <p>A multi-language implementation of the same feature in three stacks — reads and stores your name and location via browser cookies.</p>
 
                 <div id="cookie-app-container" class="cookie-container">
                     <p id="cookie-greeting" class="cookie-greeting">Scanning for cookies...</p>
@@ -239,7 +391,7 @@
             </div>
 
             <!-- Project 4: GeoPath AI -->
-            <div class="project-card scroll-animate premium-card">
+            <div class="project-card scroll-animate bracket-panel">
                 <div class="premium-glow"></div>
 
                 <img src="assets/images/projects/pathai.png"
@@ -247,9 +399,8 @@
                      class="project-image">
                 <h3>GeoPath AI</h3>
                 <p>
-                    Interactive AI-inspired route optimization system powered by the Dijkstra Algorithm.
-                    Users can select cities directly on the live map to calculate the shortest intelligent
-                    route with real-time path visualization and futuristic UI effects.
+                    Route optimization over a real map graph using Dijkstra's Algorithm — pick two
+                    cities and watch the shortest path resolve with live animated path-tracing.
                 </p>
 
                 <ul class="feature-list">
@@ -257,8 +408,8 @@
                     <li><i class="fas fa-route"></i> Real-time shortest path calculation</li>
                     <li><i class="fas fa-project-diagram"></i> Dijkstra graph algorithm</li>
                     <li><i class="fas fa-location-arrow"></i> Click-based city selection</li>
-                    <li><i class="fas fa-bolt"></i> Neon animated route visualization</li>
-                    <li><i class="fas fa-globe-asia"></i> Responsive dark AI map interface</li>
+                    <li><i class="fas fa-bolt"></i> Animated route visualization</li>
+                    <li><i class="fas fa-globe-asia"></i> Responsive map interface</li>
                 </ul>
 
                 <div class="tech-stack">
@@ -275,12 +426,12 @@
             </div>
 
             <!-- Project 5: SmartPath Navigator -->
-            <div class="project-card scroll-animate premium-card">
+            <div class="project-card scroll-animate bracket-panel">
                 <img src="assets/images/projects/smartpath.png"
                      alt="SmartPath Navigator pathfinding visualization"
                      class="project-image">
                 <h3>SmartPath Navigator</h3>
-                <p>Advanced DSA-based navigation engine implementing shortest-path algorithms, intelligent routing, and visual map interaction.</p>
+                <p>DSA-driven navigation engine implementing shortest-path algorithms with interactive graph and map visualization.</p>
                 <div class="tech-stack">
                     <span>DSA</span>
                     <span>Algorithms</span>
@@ -292,12 +443,12 @@
             </div>
 
             <!-- Project 6: Kira Stream -->
-            <div class="project-card scroll-animate premium-card">
+            <div class="project-card scroll-animate bracket-panel">
                 <img src="assets/images/projects/kira.jpeg"
                      alt="Kira Stream cinematic UI screenshot"
                      class="project-image">
                 <h3>Kira Stream</h3>
-                <p>Netflix-inspired cinematic streaming platform UI with responsive design, smooth animations, and modern interface architecture.</p>
+                <p>Netflix-inspired streaming UI — responsive layout, smooth transitions, and componentized front-end architecture.</p>
                 <div class="tech-stack">
                     <span>HTML</span>
                     <span>CSS</span>
@@ -312,7 +463,9 @@
     </section>
 
     <!-- ===================== CONTACT ===================== -->
-    <section id="contact " class="contact">
+    <section id="contact" class="contact">
+        <div class="bg-bubble cyan" style="width:340px;height:340px;top:10px;left:-90px;"></div>
+
         <h2>Connect With Me</h2>
 
         <div class="social-links scroll-animate">
@@ -336,12 +489,13 @@
 
     <!-- ===================== FEEDBACK ===================== -->
     <section id="feedback" class="feedback">
-    <div class="feedback-container scroll-animate premium-card">
+    <div class="feedback-container scroll-animate bracket-panel">
 
-        <h2 class="section-title">Feedback & Reviews</h2>
+        <p class="eyebrow" style="justify-content:center;"><span class="num">SEC — 04</span> FEEDBACK</p>
+        <h2 class="section-title">Feedback &amp; Reviews</h2>
 
         <p class="about-text">
-            Every message leaves a trace in the journey.  
+            Every message leaves a trace in the journey.
             Share your thoughts, reviews, or anonymous feedback.
         </p>
 
@@ -354,7 +508,7 @@
 
     <!-- ===================== FOOTER ===================== -->
     <footer>
-        <p>© <span id="footer-year"></span> Suraj Gurung | Built with passion</p>
+        <p><span class="footer-status"></span> SYSTEM STATUS: ONLINE &mdash; &copy; <span id="footer-year"></span> Suraj Gurung &mdash; Built with passion</p>
     </footer>
 
     <!-- ===================== SCRIPTS ===================== -->
@@ -367,8 +521,13 @@
     <script src="js/cookies.js"></script>
     <script src="js/navbar.js"></script>
     <script src="js/tictactoe.js"></script>
-    <script src="js/scroll-animation.js"></script>
-    <script src="js/main.js"></script>
+
+    <!-- Boot terminal sequence: must run first, controls #boot-screen -->
+    <script src="js/boot.js"></script>
+    <!-- Ambient effects: particle canvases, cursor-following glow -->
+    <script src="js/effects.js"></script>
+    <!-- Rotating hero roles, animated counters, skill bars, project tilt -->
+    <script src="js/interactions.js"></script>
 
     <!-- TF dependencies BEFORE the detection script -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
