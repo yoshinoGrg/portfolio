@@ -55,3 +55,6 @@ If you want to run or modify this portfolio locally:
 
 - **GitHub:** [@yoshinoGrg](https://github.com/yoshinoGrg)
 - **Feedback:** Leave anonymous feedback securely via [NGL](https://ngl.link/suraj.grg_)
+
+- **Live **
+https://yoshinogrg.github.io/portfolio/
