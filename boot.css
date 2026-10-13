@@ -1,0 +1,182 @@
+/* =======================================================================
+   BOOT.CSS — robot loader for the boot sequence (pairs with boot.js)
+   Load after style.css (and the other theme files):
+     <link rel="stylesheet" href="boot.css">
+   ======================================================================= */
+
+/* The boot screen is ALWAYS dark. Pin the colours it uses so the light theme
+   (which darkens --accent for white pages) can't make the terminal dull. */
+#boot-screen {
+    --accent: #4de1ff;
+    --accent-2: #8ef3ff;
+    --accent-line: rgba(77, 225, 255, 0.35);
+    --text-mute: #8a8a96;
+}
+
+/* The terminal cursor referenced this animation but it was never defined */
+@keyframes blinkCursor { 50% { opacity: 0; } }
+
+/* Terminal leaving */
+.terminal-window { transition: opacity 0.45s ease, transform 0.45s ease; }
+.terminal-window.is-leaving {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+    pointer-events: none;
+}
+
+/* ---------- Loader stage ---------- */
+.boot-stage {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+.boot-stage.show { opacity: 1; visibility: visible; }
+
+.boot-caption {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.26em;
+    color: var(--accent);
+    text-shadow: 0 0 12px rgba(77, 225, 255, 0.45);
+}
+.boot-percent {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
+    color: #ffffff;
+    min-width: 4ch;
+    text-align: center;
+}
+
+.boot-track {
+    position: relative;
+    width: min(520px, 86vw);
+    height: 160px;
+}
+.boot-ground {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 10px;
+    height: 3px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.12);
+    overflow: hidden;
+}
+.boot-ground-fill {
+    height: 100%;
+    width: 100%;
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+    background: linear-gradient(90deg, #4de1ff, #8ef3ff);
+    box-shadow: 0 0 12px rgba(77, 225, 255, 0.7);
+}
+
+/* ---------- Robot ---------- */
+.boot-robot {
+    position: absolute;
+    left: 0;
+    bottom: 12px;
+    width: 96px;
+    height: 128px;
+    will-change: transform;
+}
+.boot-robot .bot {
+    display: block;
+    overflow: visible;
+    filter: drop-shadow(0 0 7px rgba(77, 225, 255, 0.55));
+}
+.bot * { transform-box: fill-box; }
+.bot-arm, .bot-leg { transform-origin: 50% 8%; }
+.bot-head  { transform-origin: 50% 100%; }
+.bot-sway  { transform-origin: 50% 100%; }
+.bot-eyes  { transform-origin: 50% 50%; }
+.bot-eye   { transform-origin: 50% 50%; animation: botBlink 3.4s infinite; }
+.bot-antenna-dot { animation: botPulse 0.9s ease-in-out infinite alternate; }
+.bot-core { animation: botPulse 0.9s ease-in-out infinite alternate; }
+
+.boot-shadow {
+    position: absolute;
+    left: 50%;
+    bottom: -7px;
+    width: 60px;
+    height: 10px;
+    margin-left: -30px;
+    background: radial-gradient(ellipse at center, rgba(77, 225, 255, 0.4), transparent 70%);
+}
+
+/* ----- DANCE ----- */
+.dance .bot-bounce { animation: danceBounce 0.46s ease-in-out infinite alternate; }
+.dance .bot-sway   { animation: danceSway 0.92s ease-in-out infinite alternate; }
+.dance .bot-head   { animation: danceHead 0.46s ease-in-out infinite alternate; }
+.dance .bot-arm-l  { animation: danceArmL 0.46s ease-in-out infinite alternate; }
+.dance .bot-arm-r  { animation: danceArmR 0.46s ease-in-out infinite alternate-reverse; }
+.dance .bot-leg-l  { animation: danceLeg 0.46s ease-in-out infinite alternate; }
+.dance .bot-leg-r  { animation: danceLeg 0.46s ease-in-out infinite alternate-reverse; }
+.dance .boot-shadow { animation: shadowPulse 0.46s ease-in-out infinite alternate; }
+
+@keyframes danceBounce { from { transform: translateY(0); }   to { transform: translateY(-8px); } }
+@keyframes danceSway   { from { transform: rotate(-5deg); }   to { transform: rotate(5deg); } }
+@keyframes danceHead   { from { transform: rotate(-9deg); }   to { transform: rotate(9deg); } }
+@keyframes danceArmL   { from { transform: rotate(18deg); }   to { transform: rotate(158deg); } }
+@keyframes danceArmR   { from { transform: rotate(-18deg); }  to { transform: rotate(-158deg); } }
+@keyframes danceLeg    { from { transform: rotate(-11deg); }  to { transform: rotate(11deg); } }
+@keyframes shadowPulse { from { transform: scaleX(1); opacity: 0.9; } to { transform: scaleX(0.8); opacity: 0.6; } }
+
+/* floating music notes, only while dancing */
+.boot-note {
+    position: absolute;
+    top: 0;
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    color: #8ef3ff;
+    opacity: 0;
+    pointer-events: none;
+}
+.boot-note.n1 { left: -14px; }
+.boot-note.n2 { right: -14px; }
+.boot-note.n3 { left: 50%; margin-left: 4px; }
+.dance .boot-note { animation: noteFloat 1.8s ease-out infinite; }
+.dance .boot-note.n2 { animation-delay: 0.6s; }
+.dance .boot-note.n3 { animation-delay: 1.2s; }
+@keyframes noteFloat {
+    0%   { opacity: 0;   transform: translateY(14px) scale(0.8); }
+    20%  { opacity: 0.9; }
+    100% { opacity: 0;   transform: translateY(-34px) scale(1.1); }
+}
+
+/* ----- WALK ----- */
+.walk .bot-bounce { animation: walkBob 0.56s ease-in-out infinite; }
+.walk .bot-sway   { transform: rotate(4deg); }                /* lean forward */
+.walk .bot-eyes  { transform: translateX(3px); }              /* look ahead */
+.walk .bot-leg-l  { animation: walkLeg 0.56s ease-in-out infinite alternate; }
+.walk .bot-leg-r  { animation: walkLeg 0.56s ease-in-out infinite alternate-reverse; }
+.walk .bot-arm-l  { animation: walkArm 0.56s ease-in-out infinite alternate; }
+.walk .bot-arm-r  { animation: walkArm 0.56s ease-in-out infinite alternate-reverse; }
+.walk .boot-shadow { animation: shadowPulse 0.56s ease-in-out infinite alternate; }
+
+@keyframes walkBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes walkLeg { from { transform: rotate(-28deg); } to { transform: rotate(28deg); } }
+@keyframes walkArm { from { transform: rotate(28deg); }  to { transform: rotate(-28deg); } }
+
+/* ----- IDLE (arrived): one little wave ----- */
+.idle .bot-arm-r { animation: waveArm 0.4s ease-in-out 3 alternate; transform: rotate(-150deg); }
+@keyframes waveArm { from { transform: rotate(-135deg); } to { transform: rotate(-165deg); } }
+
+/* ----- shared ----- */
+@keyframes botBlink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
+@keyframes botPulse { from { opacity: 0.45; } to { opacity: 1; } }
+
+@media (max-width: 768px) {
+    .boot-track { height: 150px; }
+    .boot-caption { font-size: 0.7rem; letter-spacing: 0.2em; }
+}

@@ -1,0 +1,121 @@
+/* =======================================================================
+   AURORA.CSS — colourful background for the liquid glass
+   Load AFTER glass.css:
+     <link rel="stylesheet" href="glass.css">
+     <link rel="stylesheet" href="aurora.css">
+   Five soft colour fields (blue, green, yellow, orange, white) drift slowly
+   behind the whole page. Retune any colour or strength with the variables.
+   ======================================================================= */
+
+:root {
+    /* colours as "R G B" so they can take an alpha: rgb(var(--au-blue) / .3) */
+    --au-blue:   56 189 248;
+    --au-blue-2: 59 130 246;
+    --au-green:  52 211 153;
+    --au-yellow: 250 204 21;
+    --au-orange: 251 146 60;
+    --au-white:  255 255 255;
+
+    /* strength of each field (dark theme: restrained so the page stays dark) */
+    --au-a-blue:   .26;
+    --au-a-green:  .20;
+    --au-a-yellow: .13;
+    --au-a-orange: .19;
+    --au-a-blue2:  .20;
+    --au-a-white:  .05;
+}
+:root[data-theme="light"] {
+    /* light theme: pastel and stronger, white blooms for the "milky" glass look */
+    --au-a-blue:   .42;
+    --au-a-green:  .36;
+    --au-a-yellow: .34;
+    --au-a-orange: .30;
+    --au-a-blue2:  .34;
+    --au-a-white:  .85;
+}
+
+/* The moving colour layer. Oversized (inset -25%) so it can drift with a
+   cheap GPU transform instead of repainting gradients every frame. */
+:root:root:root body::after {
+    inset: -25%;
+    background:
+        radial-gradient(34vmax 34vmax at 22% 18%, rgb(var(--au-blue)   / var(--au-a-blue)),   transparent 62%),
+        radial-gradient(32vmax 32vmax at 80% 22%, rgb(var(--au-green)  / var(--au-a-green)),  transparent 62%),
+        radial-gradient(26vmax 26vmax at 62% 52%, rgb(var(--au-yellow) / var(--au-a-yellow)), transparent 62%),
+        radial-gradient(34vmax 34vmax at 24% 72%, rgb(var(--au-orange) / var(--au-a-orange)), transparent 62%),
+        radial-gradient(36vmax 36vmax at 82% 86%, rgb(var(--au-blue-2) / var(--au-a-blue2)),  transparent 62%),
+        radial-gradient(22vmax 22vmax at 46% 36%, rgb(var(--au-white)  / var(--au-a-white)),  transparent 62%);
+    will-change: transform;
+    animation: auroraDrift 48s ease-in-out infinite alternate;
+}
+:root[data-theme="light"]:root:root body::after { /* keep specificity above glass.css */
+    background:
+        radial-gradient(34vmax 34vmax at 22% 18%, rgb(var(--au-blue)   / var(--au-a-blue)),   transparent 62%),
+        radial-gradient(32vmax 32vmax at 80% 22%, rgb(var(--au-green)  / var(--au-a-green)),  transparent 62%),
+        radial-gradient(26vmax 26vmax at 62% 52%, rgb(var(--au-yellow) / var(--au-a-yellow)), transparent 62%),
+        radial-gradient(34vmax 34vmax at 24% 72%, rgb(var(--au-orange) / var(--au-a-orange)), transparent 62%),
+        radial-gradient(36vmax 36vmax at 82% 86%, rgb(var(--au-blue-2) / var(--au-a-blue2)),  transparent 62%),
+        radial-gradient(22vmax 22vmax at 46% 36%, rgb(var(--au-white)  / var(--au-a-white)),  transparent 62%);
+}
+
+@keyframes auroraDrift {
+    0%   { transform: translate3d(0, 0, 0)        rotate(0deg)  scale(1); }
+    50%  { transform: translate3d(-4%, 3%, 0)     rotate(6deg)  scale(1.08); }
+    100% { transform: translate3d(3%, -4%, 0)     rotate(-5deg) scale(1.03); }
+}
+@media (prefers-reduced-motion: reduce) {
+    :root:root:root body::after { animation: none; }
+}
+
+/* ---------- Let the aurora show through the hero ----------
+   style.css / theme.css gave the hero an opaque gradient that would hide it. */
+:root:root .hero { background: transparent; }
+:root:root .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse 80% 70% at 50% 50%, transparent 45%, rgba(0, 0, 0, 0.38) 100%);
+}
+:root[data-theme="light"]:root .hero::before {
+    background: radial-gradient(ellipse 70% 60% at 50% 45%, rgba(255, 255, 255, 0.55), transparent 70%);
+}
+
+/* ---------- Legibility: nav floats over content, so give it more body ---------- */
+:root:root:root .logo-container,
+:root:root:root .theme-toggle,
+:root:root:root .hamburger {
+    background:
+        linear-gradient(160deg, var(--glass-sheen), transparent 55%),
+        rgba(12, 12, 16, 0.55);
+}
+:root[data-theme="light"]:root:root .logo-container,
+:root[data-theme="light"]:root:root .theme-toggle,
+:root[data-theme="light"]:root:root .hamburger {
+    background:
+        linear-gradient(160deg, rgba(255, 255, 255, 0.8), transparent 55%),
+        rgba(255, 255, 255, 0.72);
+}
+@media (min-width: 769px) {
+    :root:root:root #nav-links {
+        background:
+            linear-gradient(160deg, var(--glass-sheen), transparent 55%),
+            rgba(12, 12, 16, 0.55);
+        -webkit-backdrop-filter: blur(22px) saturate(170%);
+        backdrop-filter: blur(22px) saturate(170%);
+    }
+    :root[data-theme="light"]:root:root #nav-links {
+        background:
+            linear-gradient(160deg, rgba(255, 255, 255, 0.8), transparent 55%),
+            rgba(255, 255, 255, 0.72);
+    }
+}
+
+/* ---------- Footer: frosted instead of a solid bar ---------- */
+:root:root footer {
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: var(--glass-fx);
+    backdrop-filter: var(--glass-fx);
+    border-top: 1px solid var(--glass-border);
+}

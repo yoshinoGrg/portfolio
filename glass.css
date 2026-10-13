@@ -1,0 +1,181 @@
+/* =======================================================================
+   GLASS.CSS — Step 3: liquid glass
+   Load AFTER style.css and theme.css:
+     <link rel="stylesheet" href="style.css?v=12">
+     <link rel="stylesheet" href="theme.css">
+     <link rel="stylesheet" href="glass.css">
+   Material = translucent tint + diagonal sheen + backdrop blur/saturation
+              + bright top edge (specular) + soft inner glow + drop shadow.
+   `:root:root` is a specificity boost so these win over style.css/theme.css
+   without !important.
+   ======================================================================= */
+
+/* ---------- Material tokens (dark) ---------- */
+:root {
+    --glass-bg:      rgba(255, 255, 255, 0.045);
+    --glass-sheen:   rgba(255, 255, 255, 0.10);
+    --glass-border:  rgba(255, 255, 255, 0.12);
+    --glass-hi:      rgba(255, 255, 255, 0.30);   /* top specular edge */
+    --glass-lo:      rgba(255, 255, 255, 0.05);   /* bottom edge */
+    --glass-inner:   rgba(255, 255, 255, 0.025);  /* inner glow */
+    --glass-shadow:  0 12px 40px rgba(0, 0, 0, 0.38);
+    --glass-blur:    18px;
+    --glass-menu-bg: rgba(10, 10, 13, 0.72);
+
+    /* backdrop-filter recipes; glass.js swaps the "small" one for the
+       refraction version on browsers that support it */
+    --glass-fx:       blur(var(--glass-blur)) saturate(170%);
+    --glass-fx-small: blur(var(--glass-blur)) saturate(170%);
+}
+
+/* ---------- Material tokens (light) ---------- */
+:root[data-theme="light"] {
+    --glass-bg:      rgba(255, 255, 255, 0.42);
+    --glass-sheen:   rgba(255, 255, 255, 0.70);
+    --glass-border:  rgba(255, 255, 255, 0.75);
+    --glass-hi:      rgba(255, 255, 255, 0.95);
+    --glass-lo:      rgba(14, 22, 32, 0.06);
+    --glass-inner:   rgba(255, 255, 255, 0.35);
+    --glass-shadow:  0 12px 36px rgba(15, 23, 42, 0.12);
+    --glass-menu-bg: rgba(242, 245, 249, 0.82);
+}
+
+@media (max-width: 768px) { :root { --glass-blur: 12px; } }  /* cheaper on phones */
+
+/* ---------- Ambient colour behind the glass ----------
+   Glass needs something to refract. Fixed soft orbs stay put while content
+   scrolls over them, so the blur visibly "moves" the colour. */
+:root:root body::after {
+    background:
+        radial-gradient(40vmax 40vmax at 12% 8%,  rgba(77, 225, 255, 0.14), transparent 60%),
+        radial-gradient(36vmax 36vmax at 92% 32%, rgba(124, 92, 255, 0.12), transparent 60%),
+        radial-gradient(46vmax 46vmax at 70% 100%, rgba(77, 225, 255, 0.10), transparent 60%);
+}
+:root[data-theme="light"]:root body::after {
+    background:
+        radial-gradient(40vmax 40vmax at 12% 8%,  rgba(14, 116, 144, 0.14), transparent 60%),
+        radial-gradient(36vmax 36vmax at 92% 32%, rgba(124, 92, 255, 0.10), transparent 60%),
+        radial-gradient(46vmax 46vmax at 70% 100%, rgba(14, 116, 144, 0.10), transparent 60%);
+}
+
+/* ---------- The glass material: large surfaces ---------- */
+:root:root .about-container,
+:root:root .info-card,
+:root:root .project-card,
+:root:root .feedback-container {
+    background:
+        linear-gradient(135deg, var(--glass-sheen), transparent 42%),
+        var(--glass-bg);
+    -webkit-backdrop-filter: var(--glass-fx);
+    backdrop-filter: var(--glass-fx);
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+    box-shadow:
+        inset 0 1px 0 var(--glass-hi),
+        inset 0 -1px 0 var(--glass-lo),
+        inset 0 0 28px var(--glass-inner),
+        var(--glass-shadow);
+    transform-style: flat;   /* preserve-3d and backdrop-filter don't mix */
+}
+
+:root:root .project-card:hover {
+    border-color: var(--accent-line);
+    box-shadow:
+        inset 0 1px 0 var(--glass-hi),
+        inset 0 -1px 0 var(--glass-lo),
+        inset 0 0 36px var(--accent-dim),
+        0 22px 50px rgba(0, 0, 0, 0.30);
+}
+:root[data-theme="light"]:root .project-card:hover {
+    box-shadow:
+        inset 0 1px 0 var(--glass-hi),
+        inset 0 -1px 0 var(--glass-lo),
+        inset 0 0 36px var(--accent-dim),
+        0 22px 50px rgba(15, 23, 42, 0.14);
+}
+
+/* Corner brackets sit very close to rounded corners; soften them on glass */
+:root:root .about-container.bracket-panel::before,
+:root:root .info-card.bracket-panel::before,
+:root:root .project-card.bracket-panel::before,
+:root:root .feedback-container.bracket-panel::before,
+:root:root .about-container.bracket-panel::after,
+:root:root .info-card.bracket-panel::after,
+:root:root .project-card.bracket-panel::after,
+:root:root .feedback-container.bracket-panel::after {
+    opacity: 0.35;
+    margin: 6px;
+    border-radius: 4px;
+}
+
+/* ---------- The glass material: small pills and round buttons ---------- */
+:root:root .logo-container,
+:root:root .hamburger,
+:root:root .theme-toggle,
+:root:root #back-to-top,
+:root:root .social-card {
+    background:
+        linear-gradient(160deg, var(--glass-sheen), transparent 55%),
+        var(--glass-bg);
+    -webkit-backdrop-filter: var(--glass-fx-small);
+    backdrop-filter: var(--glass-fx-small);
+    border: 1px solid var(--glass-border);
+    box-shadow:
+        inset 0 1px 0 var(--glass-hi),
+        inset 0 -1px 0 var(--glass-lo),
+        inset 0 0 18px var(--glass-inner),
+        var(--glass-shadow);
+}
+:root:root .social-card:hover {
+    border-color: var(--accent-line);
+    box-shadow:
+        inset 0 1px 0 var(--glass-hi),
+        inset 0 0 24px var(--accent-dim),
+        0 14px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* Desktop nav pill (mobile keeps the full-width menu panel below) */
+@media (min-width: 769px) {
+    :root:root #nav-links {
+        background:
+            linear-gradient(160deg, var(--glass-sheen), transparent 55%),
+            var(--glass-bg);
+        -webkit-backdrop-filter: var(--glass-fx-small);
+        backdrop-filter: var(--glass-fx-small);
+        border: 1px solid var(--glass-border);
+        box-shadow:
+            inset 0 1px 0 var(--glass-hi),
+            inset 0 -1px 0 var(--glass-lo),
+            inset 0 0 18px var(--glass-inner),
+            var(--glass-shadow);
+    }
+}
+
+/* Mobile menu panel: frosted, no pill shape */
+@media (max-width: 768px) {
+    :root:root #nav-links {
+        background: var(--glass-menu-bg);
+        -webkit-backdrop-filter: blur(24px) saturate(160%);
+        backdrop-filter: blur(24px) saturate(160%);
+        box-shadow: none;
+    }
+}
+
+/* Active nav link reads like a lit droplet inside the glass */
+:root:root #nav-links a.nav-active {
+    background: var(--accent-dim);
+    box-shadow: inset 0 1px 0 var(--glass-hi), inset 0 0 12px var(--accent-dim);
+}
+
+/* ---------- Fallbacks ---------- */
+/* No backdrop-filter support: use a more opaque tint so text stays readable */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    :root { --glass-bg: rgba(26, 26, 32, 0.92); --glass-menu-bg: rgba(10, 10, 13, 0.97); }
+    :root[data-theme="light"] { --glass-bg: rgba(255, 255, 255, 0.92); --glass-menu-bg: rgba(242, 245, 249, 0.98); }
+}
+
+/* Visitor asked the OS for less transparency: go solid, drop the blur */
+@media (prefers-reduced-transparency: reduce) {
+    :root { --glass-bg: rgb(22, 22, 28); --glass-sheen: transparent; --glass-fx: none; --glass-fx-small: none; --glass-menu-bg: rgb(10, 10, 13); }
+    :root[data-theme="light"] { --glass-bg: rgb(255, 255, 255); --glass-menu-bg: rgb(242, 245, 249); }
+}

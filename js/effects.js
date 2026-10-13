@@ -3,6 +3,8 @@
 // Lightweight canvas particle field (used for both the boot terminal and the
 // hero section) + a cyan glow that follows the mouse in the hero.
 // Pure vanilla JS, no dependencies, respects prefers-reduced-motion.
+// Theme-aware: the hero particles read --particle-rgb (set in theme.css) and
+// update when theme.js fires "themechange". The boot screen stays dark/cyan.
 // ===========================================================================
 (function () {
     const reducedMotion =
@@ -17,6 +19,18 @@
             options
         );
 
+        const isBoot = canvasId === "boot-particles";
+        let rgb = opts.color;
+
+        function readColor() {
+            if (isBoot) return; // boot terminal is always dark, keep its cyan
+            const v = getComputedStyle(document.documentElement)
+                .getPropertyValue("--particle-rgb")
+                .trim();
+            if (v) rgb = v;
+        }
+        readColor();
+
         let particles = [];
         let width, height;
         let raf;
@@ -27,7 +41,7 @@
         }
 
         function spawn() {
-            const count = Math.max(20, Math.floor((width * height) / 14000) );
+            const count = Math.max(20, Math.floor((width * height) / 14000));
             const total = Math.min(opts.density, count);
             particles = new Array(total).fill(0).map(() => ({
                 x: Math.random() * width,
@@ -51,9 +65,9 @@
 
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(${opts.color},${p.a})`;
+                ctx.fillStyle = `rgba(${rgb},${p.a})`;
                 ctx.shadowBlur = 6;
-                ctx.shadowColor = `rgba(${opts.color},0.8)`;
+                ctx.shadowColor = `rgba(${rgb},0.8)`;
                 ctx.fill();
             }
             raf = requestAnimationFrame(tick);
@@ -64,6 +78,16 @@
         window.addEventListener("resize", () => {
             resize();
             spawn();
+        });
+
+        // Pick up the new colour when the theme flips
+        window.addEventListener("themechange", () => {
+            readColor();
+            if (reducedMotion) {
+                // no animation loop running: redraw the single static frame
+                tick();
+                cancelAnimationFrame(raf);
+            }
         });
 
         if (reducedMotion) {
