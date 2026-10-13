@@ -4,14 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Suraj Gurung (Yoshino) — B.Tech CSE student at Uttaranchal University specialising in AI & ML. Portfolio of projects, skills, and contact.">
+       <meta name="theme-color" content="#0a0a0d">
+   <script>
+     try {
+       var t = localStorage.getItem('theme') ||
+         (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+       document.documentElement.setAttribute('data-theme', t);
+     } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); }
+   </script>
     <title>Suraj Gurung | Portfolio</title>
-    <link rel="stylesheet" href="style.css?v=12">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="theme.css">
-    <link rel="stylesheet" href="theme.css">
-    <link rel="stylesheet" href="glass.css">
-    <link rel="stylesheet" href="aurora.css">
-    <link rel="stylesheet" href="boot.css">   
+    <link rel="stylesheet" href="style.css?v=13">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="theme.css?v=1">
+    <link rel="stylesheet" href="glass.css?v=1">
+    <link rel="stylesheet" href="aurora.css?v=1">
+    <link rel="stylesheet" href="boot.css?v=1">  
 </head>
 <body>
 
@@ -539,7 +546,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
     <script src="js/object-detection.js"></script>
     <script src="js/theme.js" defer></script>
-    <script src="js/glass.js" defer></script>  
+    <script src="js/glass.js" defer></script>
+    <script src="js/detail.js" defer></script>  
 
     <!-- Dynamic footer year -->
     <script>
