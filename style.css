@@ -927,3 +927,16 @@ footer p { display: flex; align-items: center; justify-content: center; gap: 10p
 /* Legacy duplicate hero rules removed — the hero is now fully defined in the
    HERO block above, plus the BOOT SEQUENCE / EFFECTS / INFO-GRID / SKILL-BARS
    blocks appended at the end of this file. */
+
+
+.coming-soon-btn {
+    opacity: 0.75;
+    cursor: not-allowed;
+    pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.coming-soon-btn i {
+    margin-right: 8px;
+}
