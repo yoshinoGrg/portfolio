@@ -32,7 +32,7 @@
         { text: "Loading Projects...", cls: "" },
         { text: "Loading Skills...", cls: "" },
         { text: "Authentication Success", cls: "boot-line-ok" },
-        { text: "Welcome Suraj Gurung", cls: "boot-welcome" },
+        { text: "Welcome !!!", cls: "boot-welcome" },
     ];
 
     // ---------- skip rules ----------
